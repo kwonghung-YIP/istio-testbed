@@ -9,3 +9,9 @@ spec:
     command: ["ping"]
     args: ["google.com"]
   restartPolicy: OnFailure
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: ServiceEntry
+metadata:
+  name: google-service-entry
+spec:
