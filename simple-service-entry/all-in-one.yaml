@@ -15,3 +15,12 @@ kind: ServiceEntry
 metadata:
   name: google-service-entry
 spec:
+  hosts:
+  - www.google.com
+  location: MESH_EXTERNAL
+  ports:
+  - number: 443
+    name: https
+    protocl: TLS
+  resolution: DNS
+
