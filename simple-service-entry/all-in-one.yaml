@@ -1,15 +1,8 @@
-apiVersion: networking.istio.io/v1alpha3
-kind: ServiceEntry
+apiVersion: v1
+kind: Pod
 metadata:
-  name: external-svc-https
+  name: svc-in-mesh
 spec:
-  hosts:
-  - api.dropboxapi.com
-  - www.googleapis.com
-  - api.facebook.com
-  location: MESH_EXTERNAL
-  ports:
-  - number: 443
-    name: https
-    protocol: TLS
-  resolution: DNS
+  containers:
+  - name: bash-ctr
+    image: bash:4.4
