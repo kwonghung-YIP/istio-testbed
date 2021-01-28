@@ -1,10 +1,10 @@
 apiVersion: networking.istio.io/v1alpha3
 kind: ServiceEntry
 metadata:
-  name: google-service-entry
+  name: github-service-entry
 spec:
   hosts:
-  - "*.my-google-alias.com"
+  - "*.my-github-alias.com"
   location: MESH_EXTERNAL
   resolution: DNS
   ports:
@@ -15,10 +15,10 @@ spec:
 apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
 metadata:
-  name: alias-to-google
+  name: github-virt-svc
 spec:
   hosts:
-  - "*.my-google-alias.com"
+  - "*.my-github-alias.com"
   http:
   - name: my-rule
     route:
