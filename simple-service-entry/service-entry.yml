@@ -11,3 +11,18 @@ spec:
   - number: 443
     name: https
     protocl: TLS
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: alias-to-google
+spec:
+  hosts:
+  - alias-to-google
+  http:
+  - name: my-rule
+    route:
+    - destination:
+        host: www.google.com
+        port:
+          number: 443
