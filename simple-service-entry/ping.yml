@@ -4,8 +4,8 @@ metadata:
   name: svc-in-mesh
 spec:
   containers:
-  - name: bash-ctr
-    image: bash:4.4
+  - name: netshoot
+    image: nicolaka/netshoot
     command: ["curl"]
     args: ["https://raw.my-github-alias.com/kwonghung-YIP/istio-testbed/main/simple-service-entry/test.txt"]
 
