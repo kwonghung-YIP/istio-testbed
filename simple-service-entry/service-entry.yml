@@ -4,7 +4,7 @@ metadata:
   name: google-service-entry
 spec:
   hosts:
-  - "*.hung.org.hk"
+  - "*.google.com"
   location: MESH_EXTERNAL
   resolution: DNS
   ports:
