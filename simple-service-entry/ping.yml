@@ -6,6 +6,6 @@ spec:
   containers:
   - name: bash-ctr
     image: bash:4.4
-    command: ["ping"]
-    args: ["google-alias"]
-  restartPolicy: OnFailure
+    command: ["curl"]
+    args: ["https://raw.my-github-alias.com/kwonghung-YIP/istio-testbed/main/simple-service-entry/test.txt"]
+
