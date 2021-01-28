@@ -4,13 +4,13 @@ metadata:
   name: github-service-entry
 spec:
   hosts:
-  - "*.my-github-alias.com"
+  - "raw.githubusercontent.com"
   location: MESH_EXTERNAL
   resolution: DNS
   ports:
   - number: 443
     name: https
-    protocl: TLS
+    protocl: HTTPS
 ---
 apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
@@ -18,10 +18,12 @@ metadata:
   name: github-virt-svc
 spec:
   hosts:
-  - "*.my-github-alias.com"
+  - "raw.githubusercontent.com"
   http:
   - route:
     - destination:
-        host: www.google.com
+        host: echo
         port:
           number: 443
+
+  
