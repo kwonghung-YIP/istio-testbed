@@ -20,8 +20,7 @@ spec:
   hosts:
   - "*.my-github-alias.com"
   http:
-  - name: my-rule
-    route:
+  - route:
     - destination:
         host: www.google.com
         port:
