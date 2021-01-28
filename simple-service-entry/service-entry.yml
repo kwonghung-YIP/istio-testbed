@@ -4,7 +4,7 @@ metadata:
   name: google-service-entry
 spec:
   hosts:
-  - "*.google.com"
+  - "*.my-google-alias.com"
   location: MESH_EXTERNAL
   resolution: DNS
   ports:
@@ -18,7 +18,7 @@ metadata:
   name: alias-to-google
 spec:
   hosts:
-  - alias-to-google
+  - "*.my-google-alias.com"
   http:
   - name: my-rule
     route:
