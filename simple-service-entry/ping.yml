@@ -6,6 +6,6 @@ spec:
   containers:
   - name: netshoot
     image: nicolaka/netshoot
-    command: ["curl"]
-    args: ["https://raw.my-github-alias.com/kwonghung-YIP/istio-testbed/main/simple-service-entry/test.txt"]
+    command: ["watch"]
+    args: ["-n 1 curl https://raw.my-github-alias.com/kwonghung-YIP/istio-testbed/main/simple-service-entry/test.txt"]
 
