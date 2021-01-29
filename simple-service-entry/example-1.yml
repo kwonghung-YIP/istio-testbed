@@ -1,0 +1,42 @@
+#
+# A simple ServiceEntry can capture the traffic
+#
+apiVersion: v1
+kind: Deployment
+metadata:
+  name: ping-app
+  labels:
+    app: ping
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ping
+  template:
+    metadata:
+      labels:
+        app: ping
+        version: v1
+    spec:
+      containers:
+      - name: netshoot
+        image: nicolaka/netshoot
+        command: ["watch"]
+        args: ["-n","1","curl","-v","https://raw.githubusercontent.com/kwonghung-YIP/istio-testbed/main/simple-service-entry/test.txt"]
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: ServiceEntry
+metadata:
+  name: github-service-entry
+spec:
+  hosts:
+  - "*.githubusercontent.com"
+  - "*.github.com"
+  location: MESH_EXTERNAL
+  resolution: DNS
+  ports:
+  - number: 443
+    name: https
+    protocol: HTTPS
+
+  
