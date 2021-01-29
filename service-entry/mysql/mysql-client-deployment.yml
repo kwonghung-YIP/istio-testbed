@@ -6,23 +6,23 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: ping-app
+  name: mysql-client
   labels:
-    app: ping
+    app: mysql-client
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: ping
+      app: mysql-client
   template:
     metadata:
       labels:
-        app: ping
+        app: mysql-client
         version: v1
     spec:
       containers:
-      - name: netshoot
-        image: nicolaka/netshoot
-        command: ["watch"]
-        args: ["-n","1","curl","-v","https://raw.githubusercontent.com/kwonghung-YIP/istio-testbed/main/service-entry/test.txt"]
+      - name: mysql-client
+        image: mysql:8
+        command: ["mysql"]
+        args: ["-h","192.168.28.130","-P","3306","-D","test","-u","john","-p'passw0rd'","-e","'source /root/traffic.sql'"]
 ---
