@@ -22,7 +22,7 @@ spec:
       - name: netshoot
         image: nicolaka/netshoot
         command: ["watch"]
-        args: ["-n","1","curl","-v","https://raw.githubusercontent.com/kwonghung-YIP/istio-testbed/main/simple-service-entry/test.txt"]
+        args: ["-n","1","curl","-v","https://raw.githubusercontent.com/kwonghung-YIP/istio-testbed/main/service-entry/test.txt"]
 ---
 apiVersion: networking.istio.io/v1alpha3
 kind: ServiceEntry
