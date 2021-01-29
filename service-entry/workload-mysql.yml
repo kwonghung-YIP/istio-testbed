@@ -1,0 +1,10 @@
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: WorkloadEntry
+metadata:
+  name: mysql
+spec:
+  address: 192.168.28.130
+  labels:
+    database: mysql
+    class: docker
