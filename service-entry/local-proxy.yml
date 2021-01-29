@@ -23,7 +23,7 @@ spec:
       - name: netshoot
         image: nicolaka/netshoot
         command: ["watch"]
-        args: ["-n","1","curl","-vs","--proxy","http://localhost/","https://www.my-github-alias.com/kwonghung-YIP/istio-testbed/main/service-entry/test.txt"]
+        args: ["-n","1","curl","-vs","--proxy","http://localhost/","http://www.my-github-alias.com/kwonghung-YIP/istio-testbed/main/service-entry/test.txt"]
 ---
 apiVersion: networking.istio.io/v1alpha3
 kind: ServiceEntry
@@ -35,13 +35,16 @@ spec:
   location: MESH_EXTERNAL
   resolution: DNS
   ports:
+  - number: 80
+    name: http
+    protocol: HTTP
   - number: 443
     name: https
     protocol: HTTPS
   endpoints:
   - address: raw.githubusercontent.com
     ports:
-      https: 443
+      http: 80
   - address: www.yahoo.com
     ports:
-      https: 443
+      http: 80
