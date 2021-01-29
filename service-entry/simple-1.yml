@@ -1,5 +1,6 @@
 #
 # A simple ServiceEntry can capture the traffic
+# without the ServiceEntry, the request still can send out but will go through the PassthroughCluster 
 #
 apiVersion: apps/v1
 kind: Deployment
