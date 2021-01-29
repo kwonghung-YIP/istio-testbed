@@ -7,9 +7,16 @@ docker run \
   -e MYSQL_DATABASE=test \
   -e MYSQL_USER=john \
   -e MYSQL_PASSWORD=passw0rd \
+  -v $(pwd)/grant-remote-access.sql:/docker-entrypoint-initdb.d/grant-remote-access.sql \
   mysql:8
 ```
 
+```sql
+grant all privileges on *.* to john@'%' identified by 'passw0rd' with grant option;
+flush privileges;
+```
+
+/docker-entrypoint-initdb.d
 2. MySQL script to generate the traffic (traffic.sql)
 ```sql
 drop procedure if exists dummy;
