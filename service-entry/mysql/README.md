@@ -43,3 +43,7 @@ docker run \
    -u john -p'passw0rd' -e 'source /root/traffic.sql'
 ```
 
+4. Deploy the MySQL client workload in mesh with the Istio injection
+```bash
+kubectl apply -f <(istioctl kube-inject -f mysql-client-deployment.yml)
+```
