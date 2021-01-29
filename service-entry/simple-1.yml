@@ -1,7 +1,7 @@
 #
 # A simple ServiceEntry can capture the traffic
 #
-apiVersion: v1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: ping-app
