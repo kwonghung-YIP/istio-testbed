@@ -38,6 +38,6 @@ spec:
     mysql: 3306
   labels:
     database: mysql
-    ver: "8"
+    version: "8"
     runtime: docker
     
