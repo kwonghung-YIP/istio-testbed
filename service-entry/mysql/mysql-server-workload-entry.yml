@@ -9,4 +9,18 @@ spec:
   tcp:
   - route:
     - destination:
-        host: 192.168.28.130
+        host: mysql-server
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: ServiceEntry
+metadata:
+  name: mysql-svc-entry
+spec:
+  hosts:
+  - mysql-server
+  location: MESH_EXTERNAL
+  ports:
+  - number: 3306
+    name: mysql
+    protocol: TCP
+  resolution: NONE
