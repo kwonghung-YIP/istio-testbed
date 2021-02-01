@@ -43,7 +43,7 @@ call dummy();
 ```bash
 docker run \
  --name mysql-client -it --rm \
- -v $(pwd)/test.sql:/root/traffic.sql \
+ -v $(pwd)/traffic.sql:/root/traffic.sql \
  mysql:8 \
  mysql \
    -h 192.168.28.130 -P 3306 -D test \
