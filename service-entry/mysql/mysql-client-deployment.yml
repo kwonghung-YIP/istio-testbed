@@ -24,5 +24,34 @@ spec:
       - name: mysql-client
         image: mysql:8
         command: ["mysql"]
-        args: ["-h192.168.28.130","-P3306","-Dtest","-u","john","-ppassw0rd","-e","source /root/traffic.sql"]
+        args: ["-h192.168.28.130","-P3306","-Dtest","-u","john","-ppassw0rd","-e","source /root/mysql/traffic.sql"]
+        volumeMounts:
+        - name: mysql-script-vol
+          mountPath: /root/mysql
+      volumes:
+      - name: mysql-script-vol
+        configMap:
+          name: mysql-script-configmap
 ---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mysql-script-configmap
+data:
+  traffic.sql: |-
+    drop procedure if exists dummy;    
+    delimiter $$
+    
+    create procedure dummy()
+    begin
+      declare cnt int default 1;
+      
+      while cnt <= 10 do
+        select current_time() from dual;
+        do sleep(1);
+        set cnt = cnt + 1;
+      end while;
+    end $$
+    
+    delimiter ;
+    call dummy();
