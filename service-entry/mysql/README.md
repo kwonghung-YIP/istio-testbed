@@ -1,7 +1,9 @@
 1. Create a new MySQL server with docker which is outside of the mesh
 ```bash
 docker run \
-  --name mysql -d --rm \
+  --name mysql -d \
+  --restart always \
+  --hostname mysql-8-container \
   -p 3306:3306 \
   -e MYSQL_RANDOM_ROOT_PASSWORD=yes \
   -e MYSQL_DATABASE=test \
