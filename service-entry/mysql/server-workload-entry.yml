@@ -14,7 +14,7 @@ spec:
 apiVersion: networking.istio.io/v1alpha3
 kind: ServiceEntry
 metadata:
-  name2: mysql-svc-entry
+  name: mysql-svc-entry
 spec:
   hosts:
   - mysql-server
@@ -27,7 +27,7 @@ spec:
   workloadSelector:
     labels:
       database: mysql
-  ---
+---
   apiVersion: networking.istio.io/v1alpha3
   kind: WorkloadEntry
   metadata:
