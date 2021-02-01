@@ -7,7 +7,6 @@ docker run \
   -e MYSQL_DATABASE=test \
   -e MYSQL_USER=john \
   -e MYSQL_PASSWORD=passw0rd \
-  -v $(pwd)/grant-remote-access.sql:/docker-entrypoint-initdb.d/grant-remote-access.sql \
   mysql:8
 ```
 
