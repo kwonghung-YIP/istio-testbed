@@ -35,7 +35,7 @@ call dummy();
 ```
 
 3. Verify and run the above script traffic.sql with MySQL client to make sure the user account "john" can connect remotely.
-   # change the IP address for your MySQL server
+   ~ change the IP address for your MySQL server
 ```bash
 docker run \
  --name mysql-client -it --rm \
