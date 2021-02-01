@@ -21,11 +21,13 @@ create procedure dummy()
 begin
   declare cnt int default 1;
 
-  while cnt <= 10 do
+  while cnt <= 10000 do
+  --loop
     select current_time() from dual;
     do sleep(1);
     set cnt = cnt + 1;
   end while;
+  -- end loop
 end $$
 
 delimiter ;
