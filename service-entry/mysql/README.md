@@ -47,7 +47,7 @@ docker run \
 ```
 
 4. Apply the MySQL client deployment in mesh with the Istio injection, 
-the pod should able query the server even without defining any Service Entry or Workload Entry.
+the pod should able to query the server even without defining any Service Entry or Workload Entry.
 ```bash
-kubectl apply -f <(istioctl kube-inject -f mysql-client-deployment.yml)
+kubectl apply -f <(istioctl kube-inject -f client-deployment.yml)
 ```
