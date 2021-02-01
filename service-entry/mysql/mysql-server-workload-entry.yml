@@ -8,3 +8,20 @@ spec:
   labels:
     database: mysql
     class: docker
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: ServiceEntry
+metadata:
+  name: mysql
+spec:
+  hosts:
+  - 192.168.28.130
+  location: MESH_INTERNAL
+  ports:
+  - number: 3306
+    name: mysql
+    protocol: TCP
+  resolution: STATIC
+  workloadSelector:
+    labels:
+      database: mysql
