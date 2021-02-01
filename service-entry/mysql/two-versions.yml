@@ -40,7 +40,7 @@ spec:
     database: mysql
     version: "8"
     runtime: docker
- ---
+---
 apiVersion: networking.istio.io/v1alpha3
 kind: WorkloadEntry
 metadata:
