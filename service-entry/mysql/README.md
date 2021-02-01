@@ -10,7 +10,6 @@ docker run \
   mysql:8
 ```
 
-/docker-entrypoint-initdb.d
 2. MySQL script to generate the traffic (traffic.sql)
 ```sql
 drop procedure if exists dummy;
