@@ -1,4 +1,4 @@
-1. Create a new MySQL server with docker which is outside of the mesh
+1. Create a new MySQL server with docker which is outside of the mesh as a external resource
 ```bash
 docker run \
   --name mysql-8 -d --rm \
