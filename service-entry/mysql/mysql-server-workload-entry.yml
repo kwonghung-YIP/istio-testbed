@@ -16,8 +16,6 @@ metadata:
 spec:
   hosts:
   - mysql-server
-  addresses:
-  - 192.168.28.130
   location: MESH_INTERNAL
   ports:
   - number: 3306
