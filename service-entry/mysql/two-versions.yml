@@ -23,33 +23,13 @@ spec:
   - number: 3306
     name: mysql
     protocol: TCP
-  resolution: NONE
-  workloadSelector:
-    labels:
-      database: mysql
----
-apiVersion: networking.istio.io/v1alpha3
-kind: WorkloadEntry
-metadata:
-  name: mysql-workload-entry-v8
-spec:
-  address: 192.168.28.130
-  ports:
-    mysql: 3306
-  labels:
-    database: mysql
-    version: "8"
-    runtime: docker
----
-apiVersion: networking.istio.io/v1alpha3
-kind: WorkloadEntry
-metadata:
-  name: mysql-workload-entry-v5
-spec:
-  address: 192.168.28.130
-  ports:
-    mysql: 3307
-  labels:
-    database: mysql
-    version: "5"
-    runtime: docker
+  resolution: STATIC
+  endpoints:
+  - address: 192.168.28.130
+    ports:
+      mysql: 3306
+  - address: 192.168.28.130
+    ports:
+      mysql: 3307
+  
+
