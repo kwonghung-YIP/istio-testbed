@@ -48,7 +48,8 @@ data:
       
       loop
         select current_time(), user(), database() from dual;
-        show variable like '%version%'
+        show variables like 'version';
+        show variables like 'hostname';
         do sleep(1);
       end loop;
     end $$
