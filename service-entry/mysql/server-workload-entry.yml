@@ -28,16 +28,16 @@ spec:
     labels:
       database: mysql
 ---
-  apiVersion: networking.istio.io/v1alpha3
-  kind: WorkloadEntry
-  metadata:
-    name: mysql-workload-entry
-  spec:
-    address: 192.168.28.130
-    ports:
-      mysql: 3306
-    labels:
-      database: mysql
-      ver: 8
-      runtime: docker
-      
+apiVersion: networking.istio.io/v1alpha3
+kind: WorkloadEntry
+metadata:
+  name: mysql-workload-entry
+spec:
+  address: 192.168.28.130
+  ports:
+    mysql: 3306
+  labels:
+    database: mysql
+    ver: 8
+    runtime: docker
+    
