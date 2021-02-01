@@ -31,7 +31,7 @@ spec:
 apiVersion: networking.istio.io/v1alpha3
 kind: WorkloadEntry
 metadata:
-  name: mysql-workload-entry
+  name: mysql-workload-entry-v8
 spec:
   address: 192.168.28.130
   ports:
@@ -44,7 +44,7 @@ spec:
 apiVersion: networking.istio.io/v1alpha3
 kind: WorkloadEntry
 metadata:
-  name: mysql-workload-entry
+  name: mysql-workload-entry-v5
 spec:
   address: 192.168.28.130
   ports:
