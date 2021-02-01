@@ -14,7 +14,7 @@ spec:
 apiVersion: networking.istio.io/v1alpha3
 kind: ServiceEntry
 metadata:
-  name: mysql-svc-entry
+  name2: mysql-svc-entry
 spec:
   hosts:
   - mysql-server
