@@ -10,7 +10,7 @@ docker run \
   mysql:8
 ```
 
-2. MySQL script to generate the traffic (traffic.sql)
+2. Prepare the MySQL script to geneate the traffic from Pod to external MySQL server (traffic.sql)
 ```sql
 drop procedure if exists dummy;
 
@@ -34,7 +34,8 @@ delimiter ;
 call dummy();
 ```
 
-3. Test the traffic.sql with a MySQL CLI, change the IP address for your MySQL server
+3. Verify and run the above script traffic.sql with MySQL client to make sure the user account "john" can connect remotely.
+   # change the IP address for your MySQL server
 ```bash
 docker run \
  --name mysql-client -it --rm \
