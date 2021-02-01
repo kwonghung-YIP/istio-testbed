@@ -8,7 +8,8 @@ begin
 
   while cnt <= 10 do
     select current_time(), user(), database();
-    show variables like "%version%";
+    show variables like "version";
+    show variables like "hostname";
     do sleep(1);
     set cnt = cnt + 1;
   end while;
