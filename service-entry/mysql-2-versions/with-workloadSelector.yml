@@ -36,7 +36,7 @@ spec:
   address: 192.168.28.134
   ports:
     mysql: 3306
-  weight: 10
+  weight: 90
   labels:
     database: mysql
     version: "5"
@@ -50,7 +50,7 @@ spec:
   address: 192.168.28.134
   ports:
     mysql: 3307
-  weight: 90
+  weight: 10
   labels:
     database: mysql
     version: "8"
