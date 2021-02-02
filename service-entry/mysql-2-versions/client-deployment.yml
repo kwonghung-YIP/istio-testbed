@@ -24,7 +24,7 @@ spec:
       - name: mysql-client
         image: mysql:8
         command: ["bash"]
-        args: ["bash","/root/traffic.sh"]
+        args: ["/root/traffic.sh"]
         volumeMounts:
         - name: mysql-script-vol
           mountPath: /root/mysql
