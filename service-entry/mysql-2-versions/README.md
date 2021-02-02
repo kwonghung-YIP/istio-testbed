@@ -54,5 +54,10 @@ kubectl apply -f <(istioctl kube-inject -f client-deployment.yml)
 ```
 
 ```bash
+kubectl apply -f with-endpoints.yml
+```
+
+```bash
+kubectl apply -f with-workloadSelector.yml
 ```
  
