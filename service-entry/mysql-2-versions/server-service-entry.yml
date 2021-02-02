@@ -28,9 +28,11 @@ spec:
   - address: 192.168.28.134
     ports:
       mysql: 3306
+    weight: 10
   - address: 192.168.28.134
     ports:
       mysql: 3307
+    weight: 90
 
   
 
