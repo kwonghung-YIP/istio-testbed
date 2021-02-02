@@ -48,4 +48,11 @@ docker run \
   -v $(pwd)/traffic.sql:/root/mysql/traffic.sql \
   mysql:8 bash /root/mysql/traffic.sh
 ```
+
+```bash
+kubectl apply -f <(istioctl kube-inject -f client-deployment.yml)
+```
+
+```bash
+```
  
