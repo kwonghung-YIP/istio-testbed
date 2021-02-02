@@ -24,10 +24,28 @@ docker run \
 ```
 
 ```bash
+#!/bin/bash
+
+while :
+do
+  mysql \
+    -h 192.168.28.134 -P 3306 -D test \
+    -u john -p'passw0rd' -e 'source /root/mysql/traffic.sql'
+  sleep 1
+done
+```
+
+```sql
+select current_time(), user(), database();
+show variables like "version";
+show variables like "hostname";
+```
+
+```bash
 docker run \
- --name mysql-client -it --rm \
- -v $(pwd)/traffic.sh:/root/traffic.sh \
- -v $(pwd)/traffic.sql:/root/traffic.sql \
- mysql:8 bash /root/traffic.sh
- ```
+  --name mysql-client -it --rm \
+  -v $(pwd)/traffic.sh:/root/mysql/traffic.sh \
+  -v $(pwd)/traffic.sql:/root/mysql/traffic.sql \
+  mysql:8 bash /root/mysql/traffic.sh
+```
  
