@@ -1,8 +1,7 @@
 1. Create a new MySQL server with docker which is outside of the mesh as a external resource
 ```bash
 docker run \
-  --name mysql-8 -d --rm \
-  --hostname mysql-8-container \
+  --name mysql -d --rm \
   -p 3306:3306 \
   -e MYSQL_RANDOM_ROOT_PASSWORD=yes \
   -e MYSQL_DATABASE=test \
@@ -45,7 +44,7 @@ docker run \
  -v $(pwd)/traffic.sql:/root/traffic.sql \
  mysql:8 \
  mysql \
-   -h 192.168.28.130 -P 3306 -D test \
+   -h 192.168.28.134 -P 3306 -D test \
    -u john -p'passw0rd' -e 'source /root/traffic.sql'
 ```
 
