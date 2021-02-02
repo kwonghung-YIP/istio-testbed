@@ -24,7 +24,7 @@ spec:
       - name: mysql-client
         image: mysql:8
         command: ["mysql"]
-        args: ["-h192.168.28.130","-P3306","-Dtest","-u","john","-ppassw0rd","-e","source /root/mysql/traffic.sql"]
+        args: ["-h192.168.28.134","-P3306","-Dtest","-u","john","-ppassw0rd","-e","source /root/mysql/traffic.sql"]
         volumeMounts:
         - name: mysql-script-vol
           mountPath: /root/mysql
