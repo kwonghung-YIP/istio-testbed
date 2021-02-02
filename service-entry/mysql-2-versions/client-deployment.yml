@@ -50,5 +50,5 @@ data:
     done
   traffic.sql: |-
     select current_time(), user(), database() from dual;
-    show variables like 'version';
-    show variables like 'hostname';
+    show variables like "version";
+    show variables like "hostname";
