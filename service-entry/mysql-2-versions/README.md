@@ -15,7 +15,7 @@ docker run \
 docker run \
   --name mysql-5 -d --rm \
   --hostname mysql-5-container \
-  -p 3306:3306 \
+  -p 3307:3306 \
   -e MYSQL_RANDOM_ROOT_PASSWORD=yes \
   -e MYSQL_DATABASE=test \
   -e MYSQL_USER=john \
