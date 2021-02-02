@@ -23,8 +23,8 @@ spec:
       containers:
       - name: mysql-client
         image: mysql:8
-        command: ["mysql"]
-        args: ["-h192.168.28.130","-P3306","-Dtest","-u","john","-ppassw0rd","-e","source /root/mysql/traffic.sql"]
+        command: ["bash"]
+        args: ["bash","/root/traffic.sh"]
         volumeMounts:
         - name: mysql-script-vol
           mountPath: /root/mysql
@@ -38,21 +38,17 @@ kind: ConfigMap
 metadata:
   name: mysql-script-configmap
 data:
+  traffic.sh: |-
+    #!/bin/bash
+    
+    while :
+    do
+      mysql \
+        -h 192.168.28.134 -P 3306 -D test \
+        -u john -p'passw0rd' -e 'source /root/traffic.sql'
+      sleep 1
+    done
   traffic.sql: |-
-    drop procedure if exists dummy;    
-    delimiter $$
-    
-    create procedure dummy()
-    begin
-      declare cnt int default 1;
-      
-      loop
-        select current_time(), user(), database() from dual;
-        show variables like 'version';
-        show variables like 'hostname';
-        do sleep(1);
-      end loop;
-    end $$
-    
-    delimiter ;
-    call dummy();
+    select current_time(), user(), database() from dual;
+    show variables like 'version';
+    show variables like 'hostname';
