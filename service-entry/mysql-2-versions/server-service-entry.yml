@@ -26,7 +26,11 @@ spec:
   resolution: STATIC
   endpoints:
   - address: 192.168.28.134
-  - address: 192.168.28.139
+    ports:
+      mysql: 3306
+  - address: 192.168.28.134
+    ports:
+      mysql: 3307
 
   
 
