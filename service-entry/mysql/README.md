@@ -23,7 +23,9 @@ begin
 
   while cnt <= 10000 do
   --loop
-    select current_time() from dual;
+    select current_time(), user(), database() from dual;
+    show variables like "version";
+    show variables like "hostname";
     do sleep(1);
     set cnt = cnt + 1;
   end while;
