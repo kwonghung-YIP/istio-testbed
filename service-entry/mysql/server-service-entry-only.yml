@@ -5,7 +5,7 @@ metadata:
   name: mysql-virt-svc
 spec:
   hosts:
-  - 192.168.28.130
+  - 192.168.28.134
   tcp:
   - route:
     - destination:
