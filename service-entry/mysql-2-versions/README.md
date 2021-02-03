@@ -1,3 +1,6 @@
+This scenario assume:
+
+* you have a MySQL client running in the mesh that connect to a external MySQL server running on an external docker host,
 
 ```bash
 docker run \
