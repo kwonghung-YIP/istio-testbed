@@ -10,7 +10,7 @@ spec:
     app: istio-ingressgateway
   servers:
   - port:
-      number: 80
+      number: 81
       name: http
       protocol: HTTP
     hosts:
@@ -26,6 +26,7 @@ spec:
   gateways:
   #- "istio-system/nginx-gateway"
   - nginx-gateway
+  exportTo: "."
   http:
   - route:
     - destination:
