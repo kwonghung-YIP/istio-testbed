@@ -14,7 +14,7 @@ spec:
       name: http
       protocol: HTTP
     hosts:
-    - "default/*.istio-testbed.org.hk"
+    - "*.istio-testbed.org.hk"
 ---
 apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
