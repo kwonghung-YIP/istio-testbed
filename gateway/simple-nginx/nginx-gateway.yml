@@ -3,6 +3,7 @@ apiVersion: networking.istio.io/v1alpha3
 kind: Gateway
 metadata:
   name: nginx-gateway
+  namespace: istio-system
 spec:
   selector:
     app: istio-ingressgateway
@@ -12,7 +13,7 @@ spec:
       name: http
       protocol: HTTP
     hosts:
-    - "*.hung.org.hk"
+    - "*.istio-testbed.org.hk"
 ---
 apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
@@ -20,9 +21,9 @@ metadata:
   name: nginx-virt-svc
 spec:
   hosts:
-  - nginx.hung.org.hk
+  - nginx.istio-testbed.org.hk
   gateways:
-  - nginx-gateway
+  - "istio-system/nginx-gateway"
   http:
   - route:
     - destination:
