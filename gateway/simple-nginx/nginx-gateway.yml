@@ -3,7 +3,7 @@ apiVersion: networking.istio.io/v1alpha3
 kind: Gateway
 metadata:
   name: nginx-gateway
-  namespace: istio-system
+  #namespace: istio-system
 spec:
   selector:
     app: istio-ingressgateway
@@ -23,7 +23,8 @@ spec:
   hosts:
   - nginx.istio-testbed.org.hk
   gateways:
-  - "istio-system/nginx-gateway"
+  #- "istio-system/nginx-gateway"
+  - nginx-gateway
   http:
   - route:
     - destination:
