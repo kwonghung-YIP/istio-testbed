@@ -5,6 +5,7 @@ metadata:
   name: nginx-gateway
   #namespace: istio-system
 spec:
+  # suppose the selector can reach the ingress-controller in istio-system space
   selector:
     app: istio-ingressgateway
   servers:
