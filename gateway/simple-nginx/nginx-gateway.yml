@@ -21,7 +21,11 @@ metadata:
 spec:
   hosts:
   - nginx.hung.org.hk
-  tcp:
+  gateways:
+  - nginx-gateway
+  http:
   - route:
     - destination:
         host: nginx-service
+        port:
+          number: 8080
