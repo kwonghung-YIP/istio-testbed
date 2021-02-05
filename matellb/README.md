@@ -1,4 +1,4 @@
-## 1. [Install MatelLB] [official guide](https://metallb.universe.tf/installation/)
+## 1. Install MatelLB ([the official guide](https://metallb.universe.tf/installation/))
 
 ```bash
 kubectl edit configmap -n kube-system kube-proxy
