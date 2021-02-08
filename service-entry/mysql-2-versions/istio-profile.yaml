@@ -223,8 +223,8 @@ spec:
       defaultNodeSelector: {}
       configValidation: true
       meshExpansion:
-        enabled: true
-        #useILB: false
+        enabled: false
+        useILB: false
       multiCluster:
         #enabled: false
         clusterName: "kube-cluster"
