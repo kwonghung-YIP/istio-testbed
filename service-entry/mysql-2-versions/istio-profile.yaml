@@ -247,7 +247,7 @@ spec:
         - fromRegistry: kube-cluster
         gateways:
         - registryServiceName: istio-ingressgateway.istio-system.svc.cluster.local
-          port: 443      
+          port: 15017
       mountMtlsCerts: false
     base:
       enableCRDTemplates: false
