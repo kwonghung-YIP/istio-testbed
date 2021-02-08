@@ -9,7 +9,8 @@ spec:
   # You may override parts of meshconfig by uncommenting the following lines.
   meshConfig:
     defaultConfig:
-      proxyMetadata: {}
+      proxyMetadata:
+        ISTIO_META_DNS_CAPTURE: "true"
     enablePrometheusMerge: true
     # Opt-out of global http2 upgrades.
     # Destination rule is used to opt-in.
@@ -71,6 +72,10 @@ spec:
               targetPort: 15012
               name: tcp-istiod
               protocol: TCP
+            - port: 15017
+              targetPort: 15017
+              name: webhook-istiod
+              protocol: TCP
             - port: 15443
               targetPort: 15443
               name: tls
@@ -101,7 +106,7 @@ spec:
 
     egressGateways:
     - name: istio-egressgateway
-      enabled: false
+      enabled: true
       k8s:
         env:
           - name: ISTIO_META_ROUTER_MODE
