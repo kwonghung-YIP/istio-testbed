@@ -223,13 +223,13 @@ spec:
       defaultNodeSelector: {}
       configValidation: true
       meshExpansion:
-        enabled: false
-        useILB: false
+        enabled: true
+        #useILB: false
       multiCluster:
-        enabled: false
-        clusterName: ""
+        #enabled: false
+        clusterName: "kube-cluster"
       omitSidecarInjectorConfigMap: false
-      network: ""
+      network: "main-network"
       defaultResources:
         requests:
           cpu: 10m
@@ -242,7 +242,12 @@ spec:
           aud: istio-ca
       sts:
         servicePort: 0
-      meshNetworks: {}
+      meshNetworks:
+        endpoints:
+        - fromRegistry: kube-cluster
+        gateways:
+        - registryServiceName: istio-ingressgateway.istio-system.svc.cluster.local
+          port: 443      
       mountMtlsCerts: false
     base:
       enableCRDTemplates: false
