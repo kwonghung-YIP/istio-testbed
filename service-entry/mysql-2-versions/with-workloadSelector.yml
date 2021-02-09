@@ -1,29 +1,17 @@
 ---
 apiVersion: networking.istio.io/v1alpha3
-kind: VirtualService
-metadata:
-  name: mysql-virt-svc
-spec:
-  hosts:
-  - 192.168.28.134
-  tcp:
-  - route:
-    - destination:
-        host: mysql-server
----
-apiVersion: networking.istio.io/v1alpha3
 kind: ServiceEntry
 metadata:
   name: mysql-svc-entry
 spec:
   hosts:
-  - mysql-server
+  - docker-mysql-v5.hung.org.hk
   location: MESH_INTERNAL
   ports:
   - number: 3306
     name: mysql
     protocol: TCP
-  resolution: STATIC
+  resolution: DNS
   workloadSelector:
     labels:
       database: mysql
@@ -33,10 +21,9 @@ kind: WorkloadEntry
 metadata:
   name: mysql-v5-workload-entry
 spec:      
-  address: 192.168.28.134
+  address: docker-mysql-v5.hung.org.hk
   ports:
     mysql: 3306
-  weight: 90
   labels:
     database: mysql
     version: "5"
@@ -47,9 +34,9 @@ kind: WorkloadEntry
 metadata:
   name: mysql-v8-workload-entry
 spec:
-  address: 192.168.28.134
+  address: docker-mysql-v8.hung.org.hk
   ports:
-    mysql: 3307
+    mysql: 3306
   weight: 10
   labels:
     database: mysql
