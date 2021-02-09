@@ -37,7 +37,6 @@ spec:
   address: docker-mysql-v8.hung.org.hk
   ports:
     mysql: 3306
-  weight: 10
   labels:
     database: mysql
     version: v8
