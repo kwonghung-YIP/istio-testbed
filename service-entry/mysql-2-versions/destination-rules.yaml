@@ -25,20 +25,20 @@ metadata:
   name: mysql-dest-rule
 spec:
   host: docker-mysql-v5.hung.org.hk
-  subsets:
+  trafficPolicy:
+    connectionPool:
+      tcp:
+        maxConnections: 10 
+    outlierDetection:
+      consecutiveGatewayErrors: 5
+      interval: 2s   
+subsets:
   - name: v5
     labels:
       database: mysql
       version: v5
-    trafficPolicy:
-      connectionPool:
-        tcp:
-          maxConnections: 10 
-  - name: v8
+- name: v8
     labels:
       database: mysql
       version: v8
-    trafficPolicy:
-      outlierDetection:
-        consecutiveGatewayErrors: 5
-        interval: 2s    
+ 
