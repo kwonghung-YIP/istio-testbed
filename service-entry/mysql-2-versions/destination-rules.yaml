@@ -15,7 +15,7 @@ spec:
         subset: v5
       weight: 80
     - destination:
-        host: docker-mysql-v8.hung.org.hk
+        host: docker-mysql-v5.hung.org.hk
         subset: v8
       weight: 20
 ---
