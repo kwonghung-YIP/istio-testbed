@@ -1,22 +1,43 @@
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: mysql-virt-svc
+spec:
+  hosts:
+  - docker-mysql-v5.hung.org.hk
+  tcp:
+  - route:
+    - weight: 80
+    - destination:
+        host: docker-mysql-v5.hung.org.hk
+        subset: v5
+  - route:
+    - weight: 20
+    - destination:
+        host: docker-mysql-v8.hung.org.hk
+        subset: v8    
+---
 apiVersion: networking.istio.io/v1alpha3
 kind: DestinationRule
 metadata:
   name: mysql-dest-rule
 spec:
   host: docker-mysql-v5.hung.org.hk
-  trafficPolicy:
-    connectionPool:
-      tcp:
-        maxConnections: 10
-    outlierDetection:
-      consecutiveGatewayErrors: 5
-      interval: 2s
   subsets:
   - name: v5
     labels:
       database: mysql
       version: v5
+    trafficPolicy:
+      connectionPool:
+        tcp:
+          maxConnections: 10 
   - name: v8
     labels:
       database: mysql
       version: v8
+    trafficPolicy:
+      outlierDetection:
+        consecutiveGatewayErrors: 5
+        interval: 2s    
