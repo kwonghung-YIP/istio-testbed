@@ -11,4 +11,12 @@ spec:
     outlierDetection:
       consecutiveGatewayErrors: 5
       interval: 2s
-    
+  subsets:
+  - name: v5
+    labels:
+      database: mysql
+      version: v5
+  - name: v8
+    labels:
+      database: mysql
+      version: v8
