@@ -34,6 +34,8 @@ spec:
               fieldRef:
                 apiVersion: v1
                 fieldPath: metadata.namespace
+          - name: PILOT_TRACE_SAMPLING
+            value: "100"
         readinessProbe:
           httpGet:
             path: /ready
