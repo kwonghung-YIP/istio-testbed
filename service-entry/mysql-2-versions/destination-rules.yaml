@@ -7,16 +7,17 @@ spec:
   hosts:
   - docker-mysql-v5.hung.org.hk
   tcp:
-  - route:
-    - weight: 80
+  - match:
+    - port: 3306
+    route:
     - destination:
         host: docker-mysql-v5.hung.org.hk
         subset: v5
-  - route:
-    - weight: 20
+      weight: 80
     - destination:
         host: docker-mysql-v8.hung.org.hk
-        subset: v8    
+        subset: v8
+      weight: 20
 ---
 apiVersion: networking.istio.io/v1alpha3
 kind: DestinationRule
