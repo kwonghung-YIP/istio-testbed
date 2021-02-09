@@ -24,7 +24,7 @@ docker run \
 docker run \
   --name mysql-8 -d --rm \
   --hostname mysql-8-container \
-  -p 3307:3306 \
+  -p 3306:3306 \
   -e MYSQL_RANDOM_ROOT_PASSWORD=yes \
   -e MYSQL_DATABASE=test \
   -e MYSQL_USER=john \
@@ -40,7 +40,7 @@ docker run \
 while :
 do
   mysql \
-    -h 192.168.28.134 -P 3306 -D test \
+    -h docker-mysql-v5.intra.hksfc.org.hk -P 3306 -D test \
     -u john -p'passw0rd' -e 'source /root/mysql/traffic.sql'
   sleep 1
 done
