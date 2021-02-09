@@ -22,6 +22,7 @@ metadata:
   name: mysql-v5-workload-entry
 spec:      
   address: docker-mysql-v5.hung.org.hk
+  weight: 80
   ports:
     mysql: 3306
   labels:
@@ -35,6 +36,7 @@ metadata:
   name: mysql-v8-workload-entry
 spec:
   address: docker-mysql-v8.hung.org.hk
+  weight: 20
   ports:
     mysql: 3306
   weight: 10
