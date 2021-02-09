@@ -22,13 +22,12 @@ metadata:
   name: mysql-v5-workload-entry
 spec:      
   address: docker-mysql-v5.hung.org.hk
-  weight: 80
   ports:
     mysql: 3306
   labels:
     database: mysql
-    version: "5"
-    platform: "docker"
+    version: v5
+    platform: docker
 ---
 apiVersion: networking.istio.io/v1alpha3
 kind: WorkloadEntry
@@ -36,11 +35,10 @@ metadata:
   name: mysql-v8-workload-entry
 spec:
   address: docker-mysql-v8.hung.org.hk
-  weight: 20
   ports:
     mysql: 3306
   weight: 10
   labels:
     database: mysql
-    version: "8"
-    platform: "docker"
+    version: v8
+    platform: docker
