@@ -1,0 +1,14 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  name: mysql-dest-rule
+spec:
+  host: docker-mysql-v5.hung.org.hk
+  trafficPolicy:
+    connectionPool:
+      tcp:
+        maxConnections: 10
+    outlierDetection:
+      consecutiveGatewayErrors: 5
+      interval: 2s
+    
