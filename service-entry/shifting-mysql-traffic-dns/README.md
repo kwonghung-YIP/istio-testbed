@@ -88,7 +88,7 @@ docker run \
 ### 6. Deploy the MySQL client POD into the mesh, without any Istio rule or component, the POD still can get connect to the MySQL 5 DB and ALL the traffic are straight to docker-mysql-v5.hung.org.hk:
 
 ```bash
-kubectl apply -f <(istioctl kube-inject -f mysql-client-deployment.yml)
+kubectl apply -f <(istioctl kube-inject -f mysql-client-deployment.yaml)
 ```
 
 ### 7. Apply the Service Entry and Workload Entry to capture the outbound traffic to MySQL 5 and MySQL 8 DB, without the further control, traffic are evenly route to both DB.
@@ -103,7 +103,7 @@ How's the Service Entry and Workload Entry interrupt the outbound tcp connection
 
 
 ```bash
-kubectl apply -f service-and-workload-entries.yml
+kubectl apply -f service-and-workload-entries.yaml
 ```
 
 ### 8. Apply the Virtual Service, Destination Rule and Subsets to divide 80% and 20% of the traffic to MySQL 5 and MySQL 8 DB, further trafficPolicy can be applied for further control the outbound connection.
@@ -116,5 +116,5 @@ How's the Destination and Subsets are applied:
 * the **labels** property defined in the Destination rule's subset matches with the **labels** property defined in the Workload Entry
 
 ```bash
-kubectl apply -f destination-rules.yml
+kubectl apply -f destination-rules.yaml
 ```
