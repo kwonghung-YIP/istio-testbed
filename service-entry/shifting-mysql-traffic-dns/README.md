@@ -1,4 +1,4 @@
-### This example illustrates how to shift tcp connections to a newer version of MySQL database that is running outside of the mesh with Workload Entry and Destination Rule for simulating the scenario of upgrading database.
+### This example illustrates how to shift tcp connections to a newer version of MySQL database that is running outside of the mesh with Workload Entry and Destination Rule for simulating the scenario of upgrading database
 
 The following is this example setup: 
 
@@ -8,7 +8,7 @@ The following is this example setup:
 * a Service Entry and 2 Workload Entries to capture the outbound traffic to 2 MySQL databases,
 * a Virtual Service and Destination Rule to control 80% and 20% traffic to MySQL 5 and MySQL 8 DB, 
 
-the routing takes place in the sidecar and without any changes in the MySQL client
+the routing takes place in the sidecar and without any changes in the MySQL client, and following are steps to set up this example.
 
 ### 0. First, we install istio with a customized IstioOperator, also enable Kiali, Grafana, Prometheus and Jaeger for demo
 
