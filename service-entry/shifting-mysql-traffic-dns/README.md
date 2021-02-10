@@ -4,7 +4,7 @@ This scenario assume that you are working on the MySQL server upgrade:
 * the current MySQL server now is version 5, and we want to route 10% of traffic to MySQL 8,
 * without changing the MySQL client setting, we use Virtual Service, Service Entry, and Workload Entry to hijack the connection and route the traffic to new DB.   
 
-0. Install istio
+###0. Install istio
 
 ```bash
 istioctl install -f istio-profile-demo2.yaml
@@ -15,7 +15,7 @@ kubectl apply -f https://raw.githubusercontent.com/istio/istio/release-1.8/sampl
 kubectl apply -f https://raw.githubusercontent.com/istio/istio/release-1.8/samples/addons/prometheus.yaml
 kubectl apply -f https://raw.githubusercontent.com/istio/istio/release-1.8/samples/addons/jaeger.yaml
 ```
-1. Run a MySQL 5 database on the standalone docker host, which is listening to the port 3306:
+###1. Run a MySQL 5 database on the standalone docker host, which is listening to the port 3306:
 
 ```bash
 docker run \
