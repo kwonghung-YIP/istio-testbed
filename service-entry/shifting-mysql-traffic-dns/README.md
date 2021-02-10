@@ -2,7 +2,7 @@
 
 The following is this example setup: 
 
-![example setup](/service/entry/shifting-mysql-traffic-dns/shifting-mysql-traffic-dns.jpg)
+![example setup](/service-entry/shifting-mysql-traffic-dns/shifting-mysql-traffic-dns.jpg)
 
 * a MySQL client POD running within the mesh keeps making connections to an external MySQL database which version is 5,
 * a MySQL 5 database running on a docker host **docker-mysql-v5.hung.org.hk**, which is the existing version using by the client,
