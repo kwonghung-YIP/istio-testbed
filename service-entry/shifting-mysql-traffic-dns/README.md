@@ -94,10 +94,8 @@ How's the Service Entry and Workload Entry interrupt the outbound tcp connection
 
 * the MySQL client makes tcp connection to the host **docker-mysql-v5.hung.org.hk:3306**, the sidecar looks for a Service Entry which **hosts** and **ports** properties are matched,
 * once the **mysql-svc-entry** Service Entry is located, the sidecar uses the labels (database: mysql) defined in **workloadSelector** property to look for the Workload Entry which label are matched, the **location** propery must be **MESH_INTERNAL** for using the workloadSelector,
-* 2 Workload Entries **mysql-v5-workload-entry** and **mysql-v8-workload-entry** are matched with the workloadSelector property, the **address** property in the Workload Entry decides the destination which are **docker-mysql-v5** and **docker-mysl-v8**.
-the Destination of the Virtual Service refers to the Service Entry (Virtual Service.destination.host => Service Entry.hosts).
-* the Service Entry's workloadSelector property defines how to match with the Workload Entries using labels (Service Entry.workloadSelector.labels => Workload Entry.labels)
-* the Workload Entries' address property determine the traffic either go to MySQL 5 or 8. (Workload Entry.address => 192.168.28.134:3306 (90%), 192.168.28.134:3307 (10%)
+* 2 Workload Entries **mysql-v5-workload-entry** and **mysql-v8-workload-entry** are matched with the workloadSelector property in Service Entry, in the Workload Entry, the **address** property decides the destination which are **docker-mysql-v5.hung.org.hk** or **docker-mysl-v8.hung.org.hk**, the **resolustion** property in Service Entry should be **DNS** in order to resolve from DNS server
+
 
 ```bash
 kubectl apply -f service-and-workload-entries.yml
