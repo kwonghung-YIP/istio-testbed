@@ -50,7 +50,7 @@ docker run \
   mysql:8
 ```
 
-### 3. Prepare a bash script for the MySQL client, it makes a new database connection to MySQL 5 for every second:
+### 3. Prepare the traffic.sh for the MySQL client, it makes a new database connection to MySQL 5 for every second:
 
 ```bash
 #!/bin/bash
@@ -58,13 +58,13 @@ docker run \
 while :
 do
   mysql \
-    -h **docker-mysql-v5.intra.hksfc.org.hk** -P 3306 -D test \
+    -h docker-mysql-v5.intra.hksfc.org.hk -P 3306 -D test \
     -u john -p'passw0rd' -e 'source /root/mysql/traffic.sql'
   sleep 1
 done
 ```
 
-4. The simple SQL to query the user and database info.
+### 4. The traffic.sql query the database version and other info from the connected MySQL DB:
 
 ```sql
 select current_time(), user(), database();
@@ -72,7 +72,7 @@ show variables like "version";
 show variables like "hostname";
 ```
 
-5. Test the bash script and the sample SQL with docker. 
+### 5. Before the POD, test the traffic.sh and traffic.sql with docker: 
 
 ```bash
 docker run \
@@ -82,13 +82,13 @@ docker run \
   mysql:8 bash /root/mysql/traffic.sh
 ```
 
-6. Deploy the MySQL client into the mesh, without other configuration, 100% of traffic will go to the MySQL server 5 (3306 port).
+### 6. Deploy the MySQL client POD into the mesh, without other configuration, 100% of traffic will go to the MySQL 5 DB (docker-mysql-v5.hung.org.hk):
 
 ```bash
 kubectl apply -f <(istioctl kube-inject -f client-deployment.yml)
 ```
 
-7. Apply the Virtual Service and Service Entry, and using the endpoints to route 10% traffic to MySQL 8. (unmanaged VM)
+### 7. Apply the Virtual Service and Service Entry, and using the endpoints to route 10% traffic to MySQL 8. (unmanaged VM)
 
 * the Virtual Service is for capture the traffic to the IP (Virtual Service.hosts => 192.168.28.134).
 * the Destination of the Virtual Service refers to the Service Entry (Virtual Service.destination.host => Service Entry.hosts).
