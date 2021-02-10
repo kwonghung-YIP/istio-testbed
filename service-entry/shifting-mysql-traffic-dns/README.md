@@ -109,7 +109,8 @@ How's the Destination and Subsets are applied:
 
 * the MySQL client makes connection to the host **docker-mysql-v5.hung.org.hk**, the sidecar looks for a Virtual Service which **hosts** property is matached,
 * the **destination.host** property of the routing rule in Virtual Service looks for a Service Entry which **hosts** property is matched,
-* with the **destination.host** and **subset** properties defined in the routing rules in Virtual Service, corresponding Destination rule and subsets are applied.
+* with the **destination.host** and **subset** properties defined in the routing rules in Virtual Service, corresponding Destination rule and subsets are applied,
+* the **labels** property defined in the Destination rule's subset matches with the **labels** property defined in the Workload Entry
 
 ```bash
 kubectl apply -f destination-rules.yml
