@@ -1,0 +1,13 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: WorkloadGroup
+metadata:
+  name: mysql-workload-group
+spec:
+  template:
+    ports:
+      tcp: 3306
+    serviceAccount: vm-operator
+  probe:
+    tcpSocket:
+      port: 3306
+      
