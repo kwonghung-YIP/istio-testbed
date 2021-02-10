@@ -82,25 +82,13 @@ docker run \
   mysql:8 bash /root/mysql/traffic.sh
 ```
 
-### 6. Deploy the MySQL client POD into the mesh, without other configuration, 100% of traffic will go to the MySQL 5 DB (docker-mysql-v5.hung.org.hk):
+### 6. Deploy the MySQL client POD into the mesh, without any Istio rule or component, the POD still can get connect to the MySQL 5 DB and ALL the traffic are straight to docker-mysql-v5.hung.org.hk:
 
 ```bash
 kubectl apply -f <(istioctl kube-inject -f client-deployment.yml)
 ```
 
-### 7. Apply the Virtual Service and Service Entry, and using the endpoints to route 10% traffic to MySQL 8. (unmanaged VM)
-
-* the Virtual Service is for capture the traffic to the IP (Virtual Service.hosts => 192.168.28.134).
-* the Destination of the Virtual Service refers to the Service Entry (Virtual Service.destination.host => Service Entry.hosts).
-* the endpoints' address property determine the traffic either go to MySQL 5 or 8. (Service Entry.endpoints.address => 192.168.28.134:3306 (90%), 192.168.28.134:3307 (10%)
-
-```bash
-kubectl apply -f with-endpoints.yml
-```
-
-8. Clearup the setting in Step 7 
-
-9. Apply the Virtual Service, Service Entry, and Workload, and using the endpoints to route 10% traffic to MySQL 8. (managed VM but missing the VM's sidecar)
+### 7. Apply the Service Entry and Workload Entry to capture the outbound traffic to MySQL 5 and MySQL 8 DB, without the further control, traffic are evenly route to both DB.
 
 * the Virtual Service is for capture the traffic to the IP (Virtual Service.hosts => 192.168.28.134).
 * the Destination of the Virtual Service refers to the Service Entry (Virtual Service.destination.host => Service Entry.hosts).
@@ -108,7 +96,11 @@ kubectl apply -f with-endpoints.yml
 * the Workload Entries' address property determine the traffic either go to MySQL 5 or 8. (Workload Entry.address => 192.168.28.134:3306 (90%), 192.168.28.134:3307 (10%)
 
 ```bash
-kubectl apply -f with-workloadSelector.yml
+kubectl apply -f service-and-workload-entries.yml
 ```
- 
 
+### 8. Apply the Service Entry and Workload Entry to capture the outbound traffic to MySQL 5 and MySQL 8 DB, without the further control, traffic are evenly route to both DB.
+
+```bash
+kubectl apply -f destination-rules.yml
+```
