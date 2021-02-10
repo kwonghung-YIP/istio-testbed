@@ -1,4 +1,4 @@
-### This example illustrates how to shift tcp connections to a newer version of MySQL database that is running outside of the mesh with Workload Entry and Destination Rule for simulating the scenario of upgrading database
+### This example illustrates how to shift tcp connections to a newer version of MySQL database that is running outside of the mesh with Workload Entry and Destination Rule for simulating the scenario of upgrading database.
 
 The following is this example setup: 
 
@@ -22,7 +22,7 @@ kubectl apply -f https://raw.githubusercontent.com/istio/istio/release-1.8/sampl
 kubectl apply -f https://raw.githubusercontent.com/istio/istio/release-1.8/samples/addons/jaeger.yaml
 ```
 
-### 1. Run a MySQL 5 database on an external docker host docker-mysql-v5.hung.org.hk (192.168.28.110):
+### 1. Spin up a MySQL 5 database on the external docker host docker-mysql-v5.hung.org.hk (192.168.28.110):
 
 ```bash
 docker run \
@@ -36,7 +36,7 @@ docker run \
   mysql:5
 ```
 
-2. Run a MySQL 8 database on the same standalone docker host, which is listening to another port 3307:
+### 2. Spin up a MySQL 8 database on another external docker host docker-mysql-v8.hung.org.hk (192.168.28.111):
 
 ```bash
 docker run \
@@ -50,7 +50,7 @@ docker run \
   mysql:8
 ```
 
-3. Prepare a bash script for the MySQL client, which keeps making new connections to the external MySQL DB.
+### 3. Prepare a bash script for the MySQL client, it makes a new database connection to MySQL 5 for every second:
 
 ```bash
 #!/bin/bash
@@ -58,7 +58,7 @@ docker run \
 while :
 do
   mysql \
-    -h docker-mysql-v5.intra.hksfc.org.hk -P 3306 -D test \
+    -h **docker-mysql-v5.intra.hksfc.org.hk** -P 3306 -D test \
     -u john -p'passw0rd' -e 'source /root/mysql/traffic.sql'
   sleep 1
 done
