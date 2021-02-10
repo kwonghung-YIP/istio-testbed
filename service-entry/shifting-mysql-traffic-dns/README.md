@@ -13,7 +13,7 @@ the routing takes place in the sidecar and without any changes in the MySQL clie
 ### 0. First, we install istio with a customized IstioOperator, also enable Kiali, Grafana, Prometheus and Jaeger for demo
 
 ```bash
-istioctl install -f istio-profile-demo2.yaml
+istioctl install -f istio-profile-demo.yaml
 
 # enable other components 
 kubectl apply -f https://raw.githubusercontent.com/istio/istio/release-1.8/samples/addons/kiali.yaml
@@ -94,19 +94,22 @@ How's the Service Entry and Workload Entry interrupt the outbound tcp connection
 
 * the MySQL client makes tcp connection to the host **docker-mysql-v5.hung.org.hk:3306**, the sidecar looks for a Service Entry which **hosts** and **ports** properties are matched,
 * once the **mysql-svc-entry** Service Entry is located, the sidecar uses the labels (database: mysql) defined in **workloadSelector** property to look for the Workload Entry which label are matched, the **location** propery must be **MESH_INTERNAL** for using the workloadSelector,
-* 2 Workload Entries **mysql-v5-workload-entry** and **mysql-v8-workload-entry** are matched with the workloadSelector property in Service Entry, in the Workload Entry, the **address** property decides the destination which are **docker-mysql-v5.hung.org.hk** or **docker-mysl-v8.hung.org.hk**, the **resolustion** property in Service Entry should be **DNS** in order to resolve from DNS server
+* 2 Workload Entries **mysql-v5-workload-entry** and **mysql-v8-workload-entry** are matched with the workloadSelector property in Service Entry,
+* the **address** property in the Workload Entry decides the destination host and port of the traffic, which are **docker-mysql-v5.hung.org.hk** or **docker-mysl-v8.hung.org.hk**
+* the **resolustion** property in Service Entry should be **DNS** in order to resolve from DNS server
 
 
 ```bash
 kubectl apply -f service-and-workload-entries.yml
 ```
 
-### 8. Apply the Virtual Service and Destination Rule to route 80% and 20% of the traffic to MySQL 5 and MySQL 8 DB, further trafficPolicy can be applied for further control the outbound connection.
+### 8. Apply the Virtual Service, Destination Rule and Subsets to divide 80% and 20% of the traffic to MySQL 5 and MySQL 8 DB, further trafficPolicy can be applied for further control the outbound connection.
 
-* the Virtual Service is for capture the traffic to the IP (Virtual Service.hosts => 192.168.28.134).
-* the Destination of the Virtual Service refers to the Service Entry (Virtual Service.destination.host => Service Entry.hosts).
-* the Service Entry's workloadSelector property defines how to match with the Workload Entries using labels (Service Entry.workloadSelector.labels => Workload Entry.labels)
-* the Workload Entries' address property determine the traffic either go to MySQL 5 or 8. (Workload Entry.address => 192.168.28.134:3306 (90%), 192.168.28.134:3307 (10%)
+How's the Destination and Subsets are applied: 
+
+* the MySQL client makes connection to the host **docker-mysql-v5.hung.org.hk**, the sidecar looks for a Virtual Service which **hosts** property is matached,
+* the **destination.host** property of the routing rule in Virtual Service looks for a Service Entry which **hosts** property is matched,
+* with the **destination.host** and **subset** properties defined in the routing rules in Virtual Service, corresponding Destination rule and subsets are applied.
 
 ```bash
 kubectl apply -f destination-rules.yml
