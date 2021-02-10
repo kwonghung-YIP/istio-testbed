@@ -1,10 +1,13 @@
-This scenario assume that you are working on the MySQL server upgrade:
+## This example illustrates how to shift tcp connections to a newer version of MySQL database that is running outside of the mesh with Workload Entry and Destination Rule for simulating the scenario of upgrading database, and following is the setup: 
 
-* we have a MySQL client running in the mesh that connect to an external MySQL server running on a standalone docker host,
-* the current MySQL server now is version 5, and we want to route 10% of traffic to MySQL 8,
-* without changing the MySQL client setting, we use Virtual Service, Service Entry, and Workload Entry to hijack the connection and route the traffic to new DB.   
+* a MySQL client POD running within the mesh keeps making connections to an external MySQL database which version is 5,
+* a MySQL 5 database running on a docker host **docker-mysql-v5.hung.org.hk**, which is the existing version using by the client,
+* a MySQL 8 database running on a docker host **docker-mysql-v8.hung.org.hk**, which is the new version to be upgraded,
+* a Service Entry and 2 Workload Entries to capture the outbound traffic to 2 MySQL databases,
+* a Virtual Service and Destination Rule to control 80% and 20% traffic to MySQL 5 and MySQL 8 DB, 
+* the routing takes place in the sidecar and without any changes in the MySQL client
 
-### 0. Install istio
+### 0. Install istio with a customized IstioOperator, and enable Kiali, Grafana, Prometheus and Jaeger for POC
 
 ```bash
 istioctl install -f istio-profile-demo2.yaml
@@ -15,7 +18,8 @@ kubectl apply -f https://raw.githubusercontent.com/istio/istio/release-1.8/sampl
 kubectl apply -f https://raw.githubusercontent.com/istio/istio/release-1.8/samples/addons/prometheus.yaml
 kubectl apply -f https://raw.githubusercontent.com/istio/istio/release-1.8/samples/addons/jaeger.yaml
 ```
-### 1. Run a MySQL 5 database on the standalone docker host, which is listening to the port 3306:
+
+### 1. Run a MySQL 5 database on an external docker host docker-mysql-v5.hung.org.hk (192.168.28.110):
 
 ```bash
 docker run \
