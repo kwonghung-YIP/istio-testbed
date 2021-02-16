@@ -22,6 +22,10 @@ kubectl create secret generic -n metallb-system memberlist --from-literal=secret
 
 ## 2. Apply the Layer2 config to enable the matellb
 
+```bash
+kubectl apply -f layer2-config.yaml
+```
+
 ## 3. Deploy the sample nginx service, external IP address should be assigned to the service which type is LoadBalancer
 ```bash
 kubectl apply -f nginx-service.yml
