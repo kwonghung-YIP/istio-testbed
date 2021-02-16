@@ -1,0 +1,13 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: WorkloadGroup
+metadata:
+  name: "tomcat"
+  namespace: "default"
+spec:
+  metadata:
+    labels:
+      app: "tomcat"
+  template:
+    serviceAccount: "vm-tomcat"
+    network: "vm-network"
+ 
