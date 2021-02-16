@@ -56,6 +56,10 @@ spec:
 
   values:
     global:
+      meshID: mesh1
+      multiCluster:
+        clusterName: "cluster1"
+      network: "kube-network"
       proxy:
         resources:
           requests:
