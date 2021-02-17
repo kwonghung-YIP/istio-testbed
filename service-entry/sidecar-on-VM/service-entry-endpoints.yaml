@@ -6,7 +6,7 @@ metadata:
 spec:
   hosts:
   - tomcat.hung.org.hk
-  location: MESH_INTERNAL
+  location: MESH_EXTERNAL
   ports:
   - number: 8080
     name: http
