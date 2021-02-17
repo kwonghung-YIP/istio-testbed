@@ -15,3 +15,29 @@ spec:
   workloadSelector:
     labels:
       app: tomcat
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: WorkloadEntry
+metadata:
+  name: tomcat7-node01
+spec:      
+  address: docker-node01
+  ports:
+    http: 8080
+  labels:
+    app: tomcat
+    version: "7"
+    platform: docker
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: WorkloadEntry
+metadata:
+  name: tomcat7-node02
+spec:
+  address: docker-node02
+  ports:
+    http: 8080
+  labels:
+    app: tomcat
+    version: "7"
+    platform: "docker"
