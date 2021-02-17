@@ -17,34 +17,29 @@ spec:
         version: v1
     spec:
       containers:
-      - name: mysql-client
-        image: mysql:8
+      - name: http-client
+        image: nicolaka/netshoot
         command: ["bash"]
-        args: ["/root/mysql/traffic.sh"]
+        args: ["/root/test/ping.sh"]
         volumeMounts:
-        - name: mysql-script-vol
-          mountPath: /root/mysql
+        - name: test-script-vol
+          mountPath: /root/test
       volumes:
-      - name: mysql-script-vol
+      - name: test-script-vol
         configMap:
-          name: mysql-script-configmap
+          name: test-script-configmap
 ---
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: mysql-script-configmap
+  name: test-script-configmap
 data:
-  traffic.sh: |-
+  ping.sh: |-
     #!/bin/bash
     
     while :
     do
-      mysql \
-        -h docker-mysql-v5.hung.org.hk -P 3306 -D test \
-        -u john -p'passw0rd' -e 'source /root/mysql/traffic.sql'
+      curl -v http://tomcat.hung.org.hk:8080/echo.txt
       sleep 1
     done
-  traffic.sql: |-
-    select current_time(), user(), database() from dual;
-    show variables like "version";
-    show variables like "hostname";
+
