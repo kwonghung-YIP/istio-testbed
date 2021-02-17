@@ -11,7 +11,7 @@ docker run \
   --name apache-httpd -d --rm \
   --hostname apache-node01 \
   -p 8080:80 \
-  -v $(PWD)/apache/echo-node01.html:/usr/local/apache2/htdocs/echo.html \
+  -v $(pwd)/apache/echo-node01.html:/usr/local/apache2/htdocs/echo.html \
   httpd:2.4
 ```
 
@@ -20,7 +20,7 @@ docker run \
   --name apache-httpd -d --rm \
   --hostname apache-node02 \
   -p 8080:80 \
-  -v $(PWD)/apache/echo-node02.html:/usr/local/apache2/htdocs/echo.html \
+  -v $(pwd)/apache/echo-node02.html:/usr/local/apache2/htdocs/echo.html \
   httpd:2.4
 ```
 
