@@ -10,4 +10,11 @@ spec:
   template:
     serviceAccount: "vm-tomcat"
     network: "vm-network"
+  probe:
+    initialDelaySeconds: 1
+    periodSeconds: 5
+    httpGet:
+      port: 8080
+
+    
  
