@@ -16,8 +16,8 @@ spec:
   - address: docker-node01.hung.org.hk
     ports:
       http: 8080
-    weight: 5
+    #weight: 20
   - address: docker-node02.hung.org.hk
     ports:
       http: 8080
-    weight: 50
+    #weight: 20
