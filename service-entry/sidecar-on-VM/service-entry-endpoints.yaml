@@ -1,0 +1,23 @@
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: ServiceEntry
+metadata:
+  name: tomcat-service-entry
+spec:
+  hosts:
+  - tomcat.hung.org.hk
+  location: MESH_INTERNAL
+  ports:
+  - number: 8080
+    name: http
+    protocol: HTTP
+  resolution: DNS
+  endpoints:
+  - address: docker-node01.hung.org.hk
+    ports:
+      http: 8080
+    weight: 5
+  - address: docker-node02.hung.org.hk
+    ports:
+      http: 8080
+    weight: 50
