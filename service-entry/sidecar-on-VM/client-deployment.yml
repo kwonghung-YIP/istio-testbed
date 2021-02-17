@@ -1,0 +1,50 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: http-client
+  labels:
+    app: http-client
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: http-client
+  template:
+    metadata:
+      labels:
+        app: http-client
+        version: v1
+    spec:
+      containers:
+      - name: mysql-client
+        image: mysql:8
+        command: ["bash"]
+        args: ["/root/mysql/traffic.sh"]
+        volumeMounts:
+        - name: mysql-script-vol
+          mountPath: /root/mysql
+      volumes:
+      - name: mysql-script-vol
+        configMap:
+          name: mysql-script-configmap
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mysql-script-configmap
+data:
+  traffic.sh: |-
+    #!/bin/bash
+    
+    while :
+    do
+      mysql \
+        -h docker-mysql-v5.hung.org.hk -P 3306 -D test \
+        -u john -p'passw0rd' -e 'source /root/mysql/traffic.sql'
+      sleep 1
+    done
+  traffic.sql: |-
+    select current_time(), user(), database() from dual;
+    show variables like "version";
+    show variables like "hostname";
