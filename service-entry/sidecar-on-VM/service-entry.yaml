@@ -11,7 +11,7 @@ spec:
   - number: 8080
     name: http
     protocol: HTTP
-  resolution: NONE
+  resolution: STATIC
   workloadSelector:
     labels:
       app: tomcat
