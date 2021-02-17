@@ -48,6 +48,7 @@ kubectl apply -f expose-services.yaml
 kubectl create serviceaccount "vm-tomcat" -n "default"
 
 ```bash
+rm -rf "${HOME}/istio-vm"
 mkdir -p "${HOME}/istio-vm"
 istioctl x workload entry configure -f workload-group.yaml -o "${HOME}/istio-vm" --clusterID "cluster1" --autoregister
 ```
