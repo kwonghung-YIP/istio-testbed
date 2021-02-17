@@ -6,6 +6,14 @@ docker run \
   tomcat:7-jdk8
 ```
 
+```bash
+docker run \
+  --name apache-httpd -d --rm \
+  --hostname httpd-host1 \
+  -p 8080:80 \
+  httpd:2.4
+```
+
 istioctl install \
   -f istio-profile.yaml \
   --set values.pilot.env.PILOT_ENABLE_WORKLOAD_ENTRY_AUTOREGISTRATION=true \
