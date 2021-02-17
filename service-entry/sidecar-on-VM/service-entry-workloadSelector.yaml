@@ -40,4 +40,4 @@ spec:
   labels:
     app: tomcat
     version: "7"
-    platform: "docker"
+    platform: docker
