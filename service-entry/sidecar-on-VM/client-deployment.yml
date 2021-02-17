@@ -18,7 +18,8 @@ spec:
     spec:
       containers:
       - name: http-client
-        image: nicolaka/netshoot
+        #image: nicolaka/netshoot
+        image: busybox
         command: ["bash"]
         args: ["/root/test/ping.sh"]
         volumeMounts:
