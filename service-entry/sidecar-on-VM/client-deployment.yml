@@ -19,7 +19,6 @@ spec:
       containers:
       - name: http-client
         image: nicolaka/netshoot
-        #image: mysql:8
         command: ["bash"]
         args: ["/root/test/ping.sh"]
         volumeMounts:
@@ -40,7 +39,7 @@ data:
     
     while :
     do
-      curl -v --dns-servers 192.168.1.10 http://tomcat.hung.org.hk:8080/
+      curl http://tomcat.hung.org.hk:8080/
       sleep 1
     done
 
