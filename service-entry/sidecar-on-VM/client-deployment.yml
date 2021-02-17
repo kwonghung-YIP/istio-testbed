@@ -39,7 +39,7 @@ data:
     
     while :
     do
-      curl -v http://tomcat.hung.org.hk:8080/echo.txt
+      curl -v http://tomcat.hung.org.hk:8080/
       sleep 1
     done
 
