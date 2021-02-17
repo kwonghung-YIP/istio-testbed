@@ -20,7 +20,7 @@ spec:
       - name: http-client
         #image: nicolaka/netshoot
         image: busybox
-        command: ["bash"]
+        command: ["/bin/sh"]
         args: ["/root/test/ping.sh"]
         volumeMounts:
         - name: test-script-vol
