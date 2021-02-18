@@ -85,3 +85,5 @@ istioctl kube-inject -f ${HOME}/istio-1.9.0/samples/helloworld/helloworld.yaml
 ```bash
 kubectl apply -f <(istioctl kube-inject -f curl-deployment.yaml)
 ```
+
+(Envoy Request Flow)[https://www.envoyproxy.io/docs/envoy/latest/intro/life_of_a_request#request-flow]
