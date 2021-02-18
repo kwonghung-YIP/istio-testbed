@@ -40,6 +40,14 @@ docker run \
   httpd:2.4
 ```
 
+```bash
+docker run \
+  --name nginx -d --rm \
+  --hostname nginx-node02 \
+  -p 8080:80 -p 8443:443 \
+  -v $(pwd)/apache/echo-node02.html:/usr/share/nginx/html/echo.html \
+  nginx:1.19.7
+```
 istioctl install \
   -f istio-profile.yaml \
   --set values.pilot.env.PILOT_ENABLE_WORKLOAD_ENTRY_AUTOREGISTRATION=true \
