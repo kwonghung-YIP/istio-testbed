@@ -13,7 +13,7 @@ spec:
         protocol: tls
       tls:
         mode: PASSTHROUGH
-        minProtocolVersion: TLSV1_2
+        #minProtocolVersion: TLSV1_2
       hosts:
         - "*"
     - port:
@@ -22,7 +22,7 @@ spec:
         protocol: tls
       tls:
         mode: PASSTHROUGH
-        minProtocolVersion: TLSV1_2
+        #minProtocolVersion: TLSV1_2
       hosts:
         - "*"
 ---
