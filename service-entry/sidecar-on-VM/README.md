@@ -48,7 +48,7 @@ docker run \
   -v $(pwd)/apache/echo-node02.html:/usr/share/nginx/html/echo.html \
   -v $(pwd)/nginx/default-ssl.conf:/etc/nginx/conf.d/default-ssl.conf \
   -v $(pwd)/apache/server.key:/usr/local/apache2/conf/server.key \
-  -v $(pwd)/apache/server.crt:/usr/local/apache2/conf/server.crt \  
+  -v $(pwd)/apache/server.crt:/usr/local/apache2/conf/server.crt \
   nginx:1.19.7
 ```
 istioctl install \
