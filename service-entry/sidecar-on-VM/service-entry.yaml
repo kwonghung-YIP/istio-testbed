@@ -9,11 +9,11 @@ spec:
   location: MESH_INTERNAL
   ports:
   - number: 8080
-    name: rest
+    name: http
     protocol: HTTP
   - number: 8443
-    name: rest-https
-    protocol: HTTPS
+    name: https
+    protocol: TLS
   resolution: STATIC
   workloadSelector:
     labels:
