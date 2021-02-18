@@ -11,6 +11,9 @@ spec:
   - number: 8080
     name: rest
     protocol: HTTP
+  - number: 8443
+    name: rest-https
+    protocol: HTTPS
   resolution: STATIC
   workloadSelector:
     labels:
