@@ -13,6 +13,6 @@ spec:
         protocol: TLS
       tls:
         mode: AUTO_PASSTHROUGH
-        minProtocolVersion: TLSV1_2
+        #minProtocolVersion: TLSV1_2
       hosts:
         - "*.local"
