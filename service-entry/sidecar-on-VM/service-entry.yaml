@@ -28,4 +28,4 @@ spec:
   trafficPolicy:
     tls:
       mode: ISTIO_MUTUAL
-      #sni: tomcat.hung.org.hk
+      sni: tomcat.hung.org.hk
