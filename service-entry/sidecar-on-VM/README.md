@@ -13,6 +13,8 @@ docker run \
   -p 8080:80 -p 8443:443 \
   -v $(pwd)/apache/echo-node01.html:/usr/local/apache2/htdocs/echo.html \
   -v $(pwd)/apache/httpd.conf:/usr/local/apache2/conf/httpd.conf \
+  -v $(pwd)/apache/server.key:/usr/local/apache2/conf/server.key \
+  -v $(pwd)/apache/server.crt:/usr/local/apache2/conf/server.crt \
   httpd:2.4
 ```
 
