@@ -39,7 +39,8 @@ data:
     
     while :
     do
-      curl -sk http://tomcat.hung.org.hk:8080/echo.html
+      echo "sleeping..."
+      #curl -sk http://tomcat.hung.org.hk:8080/echo.html
       sleep 1
     done
 
