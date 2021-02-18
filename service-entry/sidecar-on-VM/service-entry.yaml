@@ -13,7 +13,7 @@ spec:
     protocol: HTTP
   - number: 8443
     name: https
-    protocol: TLS
+    protocol: HTTPS
   resolution: STATIC
   workloadSelector:
     labels:
