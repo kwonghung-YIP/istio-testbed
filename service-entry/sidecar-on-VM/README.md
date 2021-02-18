@@ -70,3 +70,7 @@ istioctl x workload entry configure -f workload-group.yaml -o "${HOME}/istio-vm"
 ```
 
 istioctl kube-inject -f ${HOME}/istio-1.9.0/samples/helloworld/helloworld.yaml
+
+```bash
+kubectl apply -f <(istioctl kube-inject -f client-deployment.yaml)
+```
