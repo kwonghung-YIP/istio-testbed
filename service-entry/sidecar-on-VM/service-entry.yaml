@@ -26,6 +26,13 @@ metadata:
 spec:
   host: tomcat.hung.org.hk
   trafficPolicy:
-    tls:
-      mode: ISTIO_MUTUAL
-      sni: tomcat.hung.org.hk
+    portLevelSettings:
+    - port:
+        number: 8080
+      tls:
+        mode: DISABLE
+    - port:
+        number: 8443
+      tls:
+        mode: ISTIO_MUTUAL
+        sni: tomcat.hung.org.hk
