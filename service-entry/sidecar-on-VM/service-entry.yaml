@@ -15,3 +15,13 @@ spec:
   workloadSelector:
     labels:
       app: tomcat
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  name: tomcat-dest-rule
+spec:
+  host: tomcat.hung.org.hk
+  trafficPolicy:
+    tls:
+      mode: SIMPLE
