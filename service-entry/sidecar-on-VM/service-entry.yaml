@@ -27,4 +27,4 @@ spec:
   host: tomcat.hung.org.hk
   trafficPolicy:
     tls:
-      mode: SIMPLE
+      mode: DISABLE
