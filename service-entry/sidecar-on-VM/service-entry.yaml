@@ -22,18 +22,9 @@ spec:
 apiVersion: networking.istio.io/v1alpha3
 kind: DestinationRule
 metadata:
-  name: tomcat-dest-rule
+  name: enable-mutual-for-hung-org-hk
 spec:
-  host: tomcat.hung.org.hk
+  host: *.hung.org.hk
   trafficPolicy:
-    portLevelSettings:
-    - port:
-        number: 8080
-      tls:
-        mode: DISABLE
-    - port:
-        number: 8443
-      tls:
-        mode: DISABLE
-        #mode: ISTIO_MUTUAL
-        #sni: tomcat.hung.org.hk
+    tls:
+      mode: ISTIO_MUTUAL
