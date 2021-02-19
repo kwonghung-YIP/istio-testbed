@@ -24,7 +24,7 @@ kind: DestinationRule
 metadata:
   name: mtls-for-hung-org-hk
 spec:
-  host: *.hung.org.hk
+  host: "*.hung.org.hk"
   trafficPolicy:
     tls:
       mode: ISTIO_MUTUAL
