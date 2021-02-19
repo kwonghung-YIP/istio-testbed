@@ -22,7 +22,7 @@ spec:
 apiVersion: networking.istio.io/v1alpha3
 kind: DestinationRule
 metadata:
-  name: enable-mutual-for-hung-org-hk
+  name: mtls-for-hung-org-hk
 spec:
   host: *.hung.org.hk
   trafficPolicy:
