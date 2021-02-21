@@ -1,18 +1,4 @@
 ---
-apiVersion: v1
-kind: Service
-metadata:
-  name: httpd-svc
-  namespace: default
-spec:
-  ports:
-  - port: 80
-    name: http
-    protocol: TCP
-  - port: 443
-    name: https
-    protocol: TCP
----
 apiVersion: networking.istio.io/v1alpha3
 kind: ServiceEntry
 metadata:
