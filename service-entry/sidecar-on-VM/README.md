@@ -44,7 +44,7 @@ docker run \
 docker run \
   --name nginx -d --rm \
   --hostname nginx-node02 \
-  -p 8080:80 -p 8443:443 \
+  -p 80:80 -p 443:443 \
   -v $(pwd)/apache/echo-node02.html:/usr/share/nginx/html/echo.html \
   -v $(pwd)/nginx/default-ssl.conf:/etc/nginx/conf.d/default-ssl.conf \
   -v $(pwd)/apache/server.key:/etc/nginx/certs/server.key \
