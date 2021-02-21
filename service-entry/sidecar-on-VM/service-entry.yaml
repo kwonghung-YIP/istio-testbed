@@ -2,10 +2,10 @@
 apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
 metadata:
-  name: tomcat-virtual-service
+  name: http-sample
 spec:
   hosts:
-  - tomcat.hung.org.hk
+  - http-svc.default.svc.cluster.local
   tcp:
   - route:
     - destination:
