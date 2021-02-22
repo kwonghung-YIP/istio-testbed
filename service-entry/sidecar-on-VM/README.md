@@ -13,7 +13,7 @@ openssl req -x509 -newkey rsa:4096 -sha256 -nodes -days 30 \
 docker stop apache-httpd
 
 docker run \
-  --name apache-httpd -d --rm \
+  --name apache-httpd -d --restart=always \
   --hostname apache-node01 \
   -p 8080:80 -p 8443:443 \
   -v $(pwd)/apache/echo-node01.html:/usr/local/apache2/htdocs/echo.html \
