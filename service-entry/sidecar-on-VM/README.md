@@ -56,7 +56,8 @@ istioctl install \
   --set values.pilot.env.PILOT_ENABLE_WORKLOAD_ENTRY_AUTOREGISTRATION=true \
   --set values.pilot.env.PILOT_ENABLE_WORKLOAD_ENTRY_HEALTHCHECKS=true
 
-VM_APP="tomcat"
+```bash
+VM_APP="ext-apache"
 VM_NAMESPACE="default"
 WORK_DIR="<a certificate working directory>"
 SERVICE_ACCOUNT="<name of the Kubernetes service account you want to use for your VM>"
@@ -64,6 +65,7 @@ SERVICE_ACCOUNT="<name of the Kubernetes service account you want to use for you
 CLUSTER_NETWORK="kube-network"
 VM_NETWORK="vm-network"
 CLUSTER="cluster1"
+```
 
 ${HOME}/istio-1.9.0/samples/multicluster/gen-eastwest-gateway.sh \
 --mesh mesh1 --cluster "${CLUSTER}" --network "${CLUSTER_NETWORK}"
