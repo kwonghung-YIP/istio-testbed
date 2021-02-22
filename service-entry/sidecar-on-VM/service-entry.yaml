@@ -37,3 +37,14 @@ spec:
   workloadSelector:
     labels:
       app: ext-apache
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  name: mtls-for-ext-apache
+  namespace: default
+spec:
+  host: ext-apache.default.svc.cluster.local
+  trafficPolicy:
+    tls:
+      mode: ISTIO_MUTUAL
