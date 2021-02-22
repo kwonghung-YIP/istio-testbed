@@ -15,7 +15,7 @@ docker stop apache-httpd
 docker run \
   --name apache-httpd -d --rm \
   --hostname apache-node01 \
-  -p 8080:80 -p 8443:443 \
+  -p 80:80 -p 443:443 \
   -v $(pwd)/apache/echo-node01.html:/usr/local/apache2/htdocs/echo.html \
   -v $(pwd)/apache/httpd.conf:/usr/local/apache2/conf/httpd.conf \
   -v $(pwd)/apache/server.key:/usr/local/apache2/conf/server.key \
