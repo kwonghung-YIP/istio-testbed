@@ -2,50 +2,38 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: http-svc
+  name: ext-apache
   namespace: default
+  labels:
+    app: apache
 spec:
   ports:
-  - port: 80
+  - port: 8080
     name: http
     protocol: TCP
-  - port: 443
+  - port: 8443
     name: https
     protocol: TCP
----
-apiVersion: networking.istio.io/v1alpha3
-kind: VirtualService
-metadata:
-  name: http-virtual-service
-  namespace: default
-spec:
-  hosts:
-  - http-svc
-  http:
-  - route:
-    - destination:
-        host: ext-apache-servers
 ---
 apiVersion: networking.istio.io/v1alpha3
 kind: ServiceEntry
 metadata:
-  name: http-service-entry
+  name: ext-apache-service-entry
   namespace: default
+  labels:
+    app: apache
 spec:
   hosts:
-  - ext-apache-servers
-  location: MESH_INTERNAL
+  - ext-apache.default.svc.cluster.local
+  location: MESH_EXTERNAL
   ports:
-  - number: 80
+  - number: 8080
     name: http
     protocol: HTTP
-  - number: 443
+  - number: 8443
     name: https
     protocol: HTTPS
   resolution: STATIC
-  endpoints:
-  - address: 192.168.1.163
-    ports:
-      http: 80
-      https: 443
-    
+  workloadSelector:
+    labels:
+      app: ext-apache
