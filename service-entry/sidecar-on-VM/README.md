@@ -74,7 +74,7 @@ istioctl install -f eastwest-ingress-gateway.yaml
 kubectl apply -f expose-istiod.yaml
 kubectl apply -f expose-services.yaml
 
-kubectl create serviceaccount "vm-tomcat" -n "default"
+kubectl create serviceaccount "vm-apache" -n "default"
 
 ```bash
 rm -rf "${HOME}/istio-vm"
