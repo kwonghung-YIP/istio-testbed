@@ -1,18 +1,18 @@
 apiVersion: networking.istio.io/v1alpha3
 kind: WorkloadGroup
 metadata:
-  name: "tomcat"
+  name: "ext-apache"
   namespace: "default"
 spec:
   metadata:
     labels:
-      app: "tomcat"
+      app: "ext-apache"
   template:
-    serviceAccount: "vm-tomcat"
+    serviceAccount: "vm-apache"
     network: "vm-network"
   probe:
     initialDelaySeconds: 1
-    periodSeconds: 5
+    periodSeconds: 600
     httpGet:
       port: 8080
 
