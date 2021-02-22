@@ -22,7 +22,7 @@ spec:
   hosts:
   - http-svc.default.svc.cluster.local
   http:
-  - route
+  - route:
     - destination:
         host: ext-apache-servers
 ---
