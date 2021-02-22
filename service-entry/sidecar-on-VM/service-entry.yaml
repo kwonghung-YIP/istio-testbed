@@ -20,7 +20,7 @@ metadata:
   namespace: default
 spec:
   hosts:
-  - http-svc.default.svc.cluster.local
+  - http-svc
   http:
   - route:
     - destination:
