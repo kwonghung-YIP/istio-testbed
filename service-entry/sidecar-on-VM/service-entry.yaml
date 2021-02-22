@@ -5,7 +5,7 @@ metadata:
   name: ext-apache
   namespace: default
   labels:
-    app: apache
+    app: ext-apache
 spec:
   ports:
   - port: 8080
@@ -21,7 +21,7 @@ metadata:
   name: ext-apache-service-entry
   namespace: default
   labels:
-    app: apache
+    app: ext-apache
 spec:
   hosts:
   - ext-apache.default.svc.cluster.local
@@ -37,6 +37,18 @@ spec:
   workloadSelector:
     labels:
       app: ext-apache
+---
+apiVersion: security.istio.io/v1beta1
+kind: PeerAuthentication
+metadata:
+  name: mtls-for-ext-apache
+  namespace: default
+spec:
+  selector:
+    matchLabels:
+      app: ext-apache
+  mtls:
+    mode: STRICT
 ---
 apiVersion: networking.istio.io/v1alpha3
 kind: DestinationRule
