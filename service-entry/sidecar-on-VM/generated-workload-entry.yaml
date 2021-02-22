@@ -1,0 +1,70 @@
+apiVersion: networking.istio.io/v1beta1
+kind: WorkloadEntry
+metadata:
+  annotations:
+    istio.io/autoRegistrationGroup: ext-apache
+    istio.io/connectedAt: "2021-02-22T15:10:54.75320823Z"
+    istio.io/workloadController: istiod-788b6b54fc-b7c2x
+    proxy.istio.io/health-checks-enabled: "true"
+  creationTimestamp: "2021-02-22T04:30:33Z"
+  generation: 1
+  labels:
+    app: ext-apache
+    service.istio.io/canonical-name: ext-apache
+    service.istio.io/canonical-version: latest
+  managedFields:
+  - apiVersion: networking.istio.io/v1alpha3
+    fieldsType: FieldsV1
+    fieldsV1:
+      f:metadata:
+        f:annotations:
+          .: {}
+          f:istio.io/autoRegistrationGroup: {}
+          f:istio.io/connectedAt: {}
+          f:istio.io/workloadController: {}
+          f:proxy.istio.io/health-checks-enabled: {}
+        f:labels:
+          .: {}
+          f:app: {}
+          f:service.istio.io/canonical-name: {}
+          f:service.istio.io/canonical-version: {}
+        f:ownerReferences:
+          .: {}
+          k:{"uid":"c891d7b0-1bb4-496c-8878-7debbeb005f7"}:
+            .: {}
+            f:apiVersion: {}
+            f:controller: {}
+            f:kind: {}
+            f:name: {}
+            f:uid: {}
+      f:spec: {}
+      f:status:
+        .: {}
+        f:conditions: {}
+    manager: pilot-discovery
+    operation: Update
+    time: "2021-02-22T15:10:54Z"
+  name: ext-apache-192.168.1.163-vm-network
+  namespace: default
+  ownerReferences:
+  - apiVersion: networking.istio.io/v1alpha3
+    controller: true
+    kind: WorkloadGroup
+    name: ext-apache
+    uid: c891d7b0-1bb4-496c-8878-7debbeb005f7
+  resourceVersion: "473704"
+  uid: 44fd4f99-3b4a-4397-9d77-b84f4c6a5e23
+spec:
+  address: 192.168.1.163
+  labels:
+    app: ext-apache
+    service.istio.io/canonical-name: ext-apache
+    service.istio.io/canonical-version: latest
+  network: vm-network
+  serviceAccount: vm-apache
+status:
+  conditions:
+  - lastProbeTime: "2021-02-22T15:10:54.780070890Z"
+    lastTransitionTime: "2021-02-22T15:10:54.780071457Z"
+    status: "True"
+    type: Healthy
