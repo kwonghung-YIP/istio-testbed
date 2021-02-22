@@ -10,7 +10,7 @@ docker run \
 openssl req -x509 -newkey rsa:4096 -sha256 -nodes -days 30 \
   -keyout apache/server.key -out apache/server.crt -config apache/selfsign-request.cfg
 
-docker stop apache-httpd
+docker rm -f apache-httpd
 
 docker run \
   --name apache-httpd -d --restart=always \
@@ -27,10 +27,10 @@ docker run \
 openssl req -x509 -newkey rsa:4096 -sha256 -nodes -days 30 \
   -keyout apache/server.key -out apache/server.crt -config apache/selfsign-request.cfg
 
-docker stop apache-httpd
+docker rm -f apache-httpd
 
 docker run \
-  --name apache-httpd -d --rm \
+  --name apache-httpd -d --restart=always \
   --hostname apache-node02 \
   -p 8080:80 -p 8443:443 \
   -v $(pwd)/apache/echo-node02.html:/usr/local/apache2/htdocs/echo.html \
