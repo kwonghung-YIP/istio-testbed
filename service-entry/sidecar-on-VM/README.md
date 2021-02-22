@@ -80,6 +80,7 @@ kubectl create serviceaccount "vm-apache" -n "default"
 rm -rf "${HOME}/istio-vm"
 mkdir -p "${HOME}/istio-vm"
 istioctl x workload entry configure -f workload-group.yaml -o "${HOME}/istio-vm" --clusterID "cluster1" --autoregister
+echo "ISTIO_AGENT_FLAGS=\"--log_caller=all --log_output_level=all:debug --proxyLogLevel=debug\"" >> ${HOME}/cluster.env
 ```
 
 istioctl kube-inject -f ${HOME}/istio-1.9.0/samples/helloworld/helloworld.yaml
