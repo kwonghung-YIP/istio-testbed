@@ -22,7 +22,7 @@ metadata:
   namespace: default
 spec:
   hosts:
-  - ext-apache.default.svc.cluster.local
+  - ext-apache
   http:
   - name: default-route
     route:
