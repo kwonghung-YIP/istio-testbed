@@ -39,8 +39,9 @@ data:
     
     while :
     do
-      echo "sleeping..."
-      #curl -sk http://tomcat.hung.org.hk:8080/echo.html
+      #echo "sleeping..."
+      curl -s http://ext-apache:8080/echo.html
+      curl -ks https://ext-apache:8443/echi.html
       sleep 1
     done
 
