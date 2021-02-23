@@ -39,9 +39,9 @@ data:
     
     while :
     do
-      #echo "sleeping..."
+      echo "Start curl (date)..."
       curl -s http://ext-apache:8080/echo.html
-      curl -ks https://ext-apache:8443/echi.html
+      curl -ks https://ext-apache:8443/echo.html
       sleep 1
     done
 
