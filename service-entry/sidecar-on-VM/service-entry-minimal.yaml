@@ -15,41 +15,6 @@ spec:
     name: https
     protocol: TCP
 ---
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: ext-apache-dummy-nginx
-  labels:
-    app: ext-apache
-spec:
-  replicas: 1
-  selector:
-    matchLabels:
-      app: ext-apache
-      ctr: dummy-nginx
-  template:
-    metadata:
-      labels:
-        app: ext-apache
-        ctr: dummy-nginx
-    spec:
-      containers:
-      - name: nginx
-        image: nginx:1.19.6-alpine   
----
-apiVersion: networking.istio.io/v1alpha3
-kind: VirtualService
-metadata:
-  name: ext-apache-virtual-service
-  namespace: default
-spec:
-  hosts:
-  - ext-apache
-  http:
-  - route:
-    - destination:
-        host: ext-apache.dummydomain
----
 apiVersion: networking.istio.io/v1alpha3
 kind: ServiceEntry
 metadata:
@@ -59,7 +24,7 @@ metadata:
     app: ext-apache
 spec:
   hosts:
-  - ext-apache.dummydomain
+  - ext-apache.defaul.svc.cluster.local
   location: MESH_INTERNAL
   ports:
   - number: 8080
