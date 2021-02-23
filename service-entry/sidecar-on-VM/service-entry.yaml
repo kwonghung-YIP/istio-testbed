@@ -18,7 +18,7 @@ spec:
 apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
 metadata:
-  name: ext-apache-virtusl-service
+  name: ext-apache-virtual-service
   namespace: default
 spec:
   hosts:
