@@ -24,22 +24,10 @@ spec:
   hosts:
   - ext-apache.default.svc.cluster.local
   http:
-  - name: http
-    match:
-    - port: 8080
+  - name: default-route
     route:
     - destination:
         host: ext-apache-server
-        port:
-          number: 8080
-  - name: https
-    match:
-    - port: 8443
-    route:
-    - destination:
-        host: ext-apache-server
-        port:
-          number: 8443
 ---
 apiVersion: networking.istio.io/v1alpha3
 kind: ServiceEntry
