@@ -24,7 +24,7 @@ metadata:
     app: ext-apache
 spec:
   hosts:
-  - ext-apache.defaul.svc.cluster.local
+  - ext-apache.default.svc.cluster.local
   location: MESH_INTERNAL
   ports:
   - number: 8080
