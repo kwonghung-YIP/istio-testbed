@@ -15,6 +15,31 @@ spec:
     name: https
     protocol: TCP
 ---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ext-apache-dummy-nginx
+  labels:
+    app: ext-apache
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ext-apache
+      ctr: dummy-nginx
+  template:
+    metadata:
+      labels:
+        app: ext-apache
+        ctr: dummy-nginx
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:1.19.6-alpine
+        ports:
+        - containerPort: 80
+        - containerPort: 443        
+---
 apiVersion: networking.istio.io/v1alpha3
 kind: ServiceEntry
 metadata:
