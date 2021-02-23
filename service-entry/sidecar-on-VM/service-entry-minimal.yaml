@@ -44,9 +44,9 @@ metadata:
   name: mtls-for-ext-apache
   namespace: default
 spec:
-  selector:
-    matchLabels:
-      app: ext-apache
+#  selector:
+#    matchLabels:
+#      app: ext-apache
   mtls:
     mode: STRICT
 ---
