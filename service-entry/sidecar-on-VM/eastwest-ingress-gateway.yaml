@@ -5,6 +5,12 @@ metadata:
 spec:
   revision: ""
   profile: empty
+  meshConfig:
+    defaultConfig:
+      proxyMetadata:
+        # reference from CoreDNS CNI and preview profile
+        # https://github.com/istio-ecosystem/istio-coredns-plugin
+        ISTIO_META_DNS_CAPTURE: "true"
   components:
     ingressGateways:
       - name: istio-eastwestgateway
