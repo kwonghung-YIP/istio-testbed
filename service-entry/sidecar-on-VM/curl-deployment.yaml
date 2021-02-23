@@ -39,7 +39,7 @@ data:
     
     while :
     do
-      echo "Start curl (date)..."
+      echo "[$(date)] curl to ext-apache ..."
       curl -s http://ext-apache:8080/echo.html
       curl -ks https://ext-apache:8443/echo.html
       sleep 1
