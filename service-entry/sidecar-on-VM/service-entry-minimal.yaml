@@ -35,10 +35,7 @@ spec:
     spec:
       containers:
       - name: nginx
-        image: nginx:1.19.6-alpine
-        ports:
-        - containerPort: 80
-        - containerPort: 443        
+        image: nginx:1.19.6-alpine   
 ---
 apiVersion: networking.istio.io/v1alpha3
 kind: ServiceEntry
