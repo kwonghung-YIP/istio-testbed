@@ -1,4 +1,4 @@
-Reference to [Virtual Machine Installation] in Istio 1.9.0 (https://istio.io/latest/docs/setup/install/virtual-machine/)
+Reference to [Virtual Machine Installation](https://istio.io/latest/docs/setup/install/virtual-machine/) in Istio 1.9.0 
 
 ### Parameters for single-mesh, multi-network
 
