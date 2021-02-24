@@ -1,6 +1,6 @@
 Reference to [Virtual Machine Installation] in Istio 1.9.0 (https://istio.io/latest/docs/setup/install/virtual-machine/)
 
-## 1. Parameters for single-mesh, multi-network
+## Parameters for single-mesh, multi-network
 
 ```bash
 VM_APP="ext-apache"
@@ -13,7 +13,7 @@ VM_NETWORK="vm-network"
 CLUSTER="cluster1"
 ```
 
-### 2. Install the Istio, the istio-profile.yaml combine the demo profile and multi-network profile, it also enabled the workload entry auto-registration and healthcheck feature 
+### Install the Istio, the istio-profile.yaml combine the demo profile and multi-network profile, it also enabled the workload entry auto-registration and healthcheck feature 
 ```bash
 istioctl install \
   -f istio-profile.yaml \
@@ -28,27 +28,27 @@ kubectl apply -f https://raw.githubusercontent.com/istio/istio/release-1.9/sampl
 kubectl apply -f https://raw.githubusercontent.com/istio/istio/release-1.9/samples/addons/jaeger.yaml
 ```
 
-### 3. Install the eastwest ingress gateway to expose the istiod
+### Install the eastwest ingress gateway to expose the istiod
 ```bash
-#${HOME}/istio-1.9.0/samples/multicluster/gen-eastwest-gateway.sh \
---mesh mesh1 --cluster "${CLUSTER}" --network "${CLUSTER_NETWORK}" > eastwest-ingreess-gateway.yaml
+# ${HOME}/istio-1.9.0/samples/multicluster/gen-eastwest-gateway.sh \
+# --mesh mesh1 --cluster "${CLUSTER}" --network "${CLUSTER_NETWORK}" > eastwest-ingreess-gateway.yaml
 
 istioctl install -f eastwest-ingress-gateway.yaml
 ```
 
-### 4. Expose the istiod and other services to the managed VM.
+### Expose the istiod and other services to the managed VM.
 ```bash
 kubectl apply -f expose-istiod.yaml
 kubectl apply -f expose-services.yaml
 ```
 
-### 5. Create the serviceAccount 
+### Create the serviceAccount 
 ```bash
 #kubectl create serviceaccount "${SERVICE_ACCOUNT}" -n "${VM_NAMESPACE}"
 kubectl create serviceaccount "vm-apache" -n "default"
 ```
 
-### 6. Create the Workload Group and geneate the files to transfer to the Virtual Machine
+### Create the Workload Group and geneate the files to transfer to the Virtual Machine
 ```bash
 rm -rf "${HOME}/istio-vm"
 mkdir -p "${HOME}/istio-vm"
@@ -56,7 +56,7 @@ istioctl x workload entry configure -f workload-group.yaml -o "${HOME}/istio-vm"
 echo "ISTIO_AGENT_FLAGS=\"--log_caller=all --log_output_level=all:debug --proxyLogLevel=debug\"" >> ${HOME}/istio-vm/cluster.env
 ```
 
-### 7. Copy the files and install the istio-proxy into the VM
+### Copy the files and install the istio-proxy into the VM
 ```bash
 #!/bin/bash
 
@@ -97,6 +97,9 @@ istio-eastwestgateway   LoadBalancer   10.99.160.50   192.168.1.52   15021:31063
 ```
 #sudo systemctl stop istio
 sudo systemctl start istio
+```
+
+```
 tail /var/log/istio/istio.err.log /var/log/istio/istio.log -Fq -n 100
 curl -s localhost:15000/config_dump | istioctl proxy-config clusters --file -
 ```
