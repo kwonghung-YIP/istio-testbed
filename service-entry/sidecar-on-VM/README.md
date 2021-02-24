@@ -101,6 +101,11 @@ sudo systemctl enable istio
 sudo systemctl start istio
 ```
 
+### Test the inbound call from VM into the mesh
+```bash
+curl nginx-service.default.svc:8080/echo.txt
+```
+
 ### Commands for debugging istio-proxy on the VM
 ```
 tail /var/log/istio/istio.err.log /var/log/istio/istio.log -Fq -n 100
