@@ -1,6 +1,6 @@
 Reference to [Virtual Machine Installation] in Istio 1.9.0 (https://istio.io/latest/docs/setup/install/virtual-machine/)
 
-##1 Install Istio and eastwest ingress gateway
+## 1. Install Istio and eastwest ingress gateway
 
 ```bash
 VM_APP="ext-apache"
@@ -13,7 +13,7 @@ VM_NETWORK="vm-network"
 CLUSTER="cluster1"
 ```
 
-###2. Install the Istio, the istio-profile.yaml combine the demo profile and multi-network profile, it also enabled the workload entry auto-registration and healthcheck feature 
+### 1. Install the Istio, the istio-profile.yaml combine the demo profile and multi-network profile, it also enabled the workload entry auto-registration and healthcheck feature 
 ```bash
 istioctl install \
   -f istio-profile.yaml \
