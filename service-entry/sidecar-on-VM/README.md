@@ -1,6 +1,6 @@
 Reference to [Virtual Machine Installation] in Istio 1.9.0 (https://istio.io/latest/docs/setup/install/virtual-machine/)
 
-## 1. Install Istio and eastwest ingress gateway
+## 1. Parameters for single-mesh, multi-network
 
 ```bash
 VM_APP="ext-apache"
@@ -57,7 +57,7 @@ istioctl x workload entry configure -f workload-group.yaml -o "${HOME}/istio-vm"
 echo "ISTIO_AGENT_FLAGS=\"--log_caller=all --log_output_level=all:debug --proxyLogLevel=debug\"" >> ${HOME}/istio-vm/cluster.env
 ```
 
-
+### 7. Copy the files and install the istio-proxy into the VM
 ```bash
 #!/bin/bash
 
@@ -83,7 +83,19 @@ sudo cp ${WORK_DIR}/mesh.yaml /etc/istio/config/mesh
 
 sudo mkdir -p /etc/istio/proxy
 sudo chown -R istio-proxy /var/lib/istio /etc/certs /etc/istio/proxy /etc/istio/config /var/run/secrets /etc/certs/root-cert.pem
+```
 
+### Append the following entry into the /etc/hosts, the IP address is the External IP assigned to the istio-eastwestgateway
+```bash
+192.168.1.52 istiod.istio-system.svc
+```
+```bash
+hung@istio-control-plane-v19:~/istio-testbed/service-entry/sidecar-on-VM$ kubectl get svc/istio-eastwestgateway -n istio-system
+NAME                    TYPE           CLUSTER-IP     EXTERNAL-IP    PORT(S)                                                           AGE
+istio-eastwestgateway   LoadBalancer   10.99.160.50   192.168.1.52   15021:31063/TCP,15443:30728/TCP,15012:31719/TCP,15017:30729/TCP   7d17h
+```
+
+```
 #sudo systemctl stop istio
 sudo systemctl start istio
 tail /var/log/istio/istio.err.log /var/log/istio/istio.log -Fq -n 100
