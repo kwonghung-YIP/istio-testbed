@@ -1,6 +1,6 @@
 Reference to [Virtual Machine Installation] in Istio 1.9.0 (https://istio.io/latest/docs/setup/install/virtual-machine/)
 
-## Parameters for single-mesh, multi-network
+### Parameters for single-mesh, multi-network
 
 ```bash
 VM_APP="ext-apache"
