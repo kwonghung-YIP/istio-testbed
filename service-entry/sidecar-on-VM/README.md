@@ -94,16 +94,20 @@ NAME                    TYPE           CLUSTER-IP     EXTERNAL-IP    PORT(S)    
 istio-eastwestgateway   LoadBalancer   10.99.160.50   192.168.1.52   15021:31063/TCP,15443:30728/TCP,15012:31719/TCP,15017:30729/TCP   7d17h
 ```
 
+### Start the istio-proxy in the VM
 ```
 #sudo systemctl stop istio
+sudo systemctl enable istio
 sudo systemctl start istio
 ```
 
+### Commands for debugging istio-proxy on the VM
 ```
 tail /var/log/istio/istio.err.log /var/log/istio/istio.log -Fq -n 100
 curl -s localhost:15000/config_dump | istioctl proxy-config clusters --file -
 ```
 
+### Start the apache on VM-node01
 ```bash
 openssl req -x509 -newkey rsa:4096 -sha256 -nodes -days 30 \
   -keyout apache/server.key -out apache/server.crt -config apache/selfsign-request.cfg
@@ -121,6 +125,7 @@ docker run \
   httpd:2.4
 ```
 
+### Start the apache on VM-node02
 ```bash
 openssl req -x509 -newkey rsa:4096 -sha256 -nodes -days 30 \
   -keyout apache/server.key -out apache/server.crt -config apache/selfsign-request.cfg
@@ -138,6 +143,20 @@ docker run \
   httpd:2.4
 ```
 
+### Deploy the Service Entry and restrict the default namespace to use mTLS
+```
+kubectl apply -f service-entry-minimal.yaml
+```
+
+### Deploy the curl client in the mesh to generate outbound call from mesh to VM
+```bash
+#kubectl apply -f <(istioctl kube-inject -f ${HOME}/istio-1.9.0/samples/helloworld/helloworld.yaml)
+kubectl apply -f <(istioctl kube-inject -f curl-deployment.yaml)
+```
+
+### References
+* [Envoy Request Flow](https://www.envoyproxy.io/docs/envoy/latest/intro/life_of_a_request#request-flow)
+
 ```bash
 docker run \
   --name nginx -d --rm \
@@ -149,11 +168,3 @@ docker run \
   -v $(pwd)/apache/server.crt:/etc/nginx/certs/server.crt \
   nginx:1.19.7
 ```
-
-```bash
-#kubectl apply -f <(istioctl kube-inject -f ${HOME}/istio-1.9.0/samples/helloworld/helloworld.yaml)
-kubectl apply -f <(istioctl kube-inject -f curl-deployment.yaml)
-```
-
-### References
-* [Envoy Request Flow](https://www.envoyproxy.io/docs/envoy/latest/intro/life_of_a_request#request-flow)
