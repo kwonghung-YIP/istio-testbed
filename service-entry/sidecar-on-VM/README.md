@@ -13,15 +13,23 @@ VM_NETWORK="vm-network"
 CLUSTER="cluster1"
 ```
 
-### 1. Install the Istio, the istio-profile.yaml combine the demo profile and multi-network profile, it also enabled the workload entry auto-registration and healthcheck feature 
+### 2. Install the Istio, the istio-profile.yaml combine the demo profile and multi-network profile, it also enabled the workload entry auto-registration and healthcheck feature 
 ```bash
 istioctl install \
   -f istio-profile.yaml \
   --set values.pilot.env.PILOT_ENABLE_WORKLOAD_ENTRY_AUTOREGISTRATION=true \
   --set values.pilot.env.PILOT_ENABLE_WORKLOAD_ENTRY_HEALTHCHECKS=true
+
+
+# Install other components
+
+kubectl apply -f https://raw.githubusercontent.com/istio/istio/release-1.9/samples/addons/kiali.yaml
+kubectl apply -f https://raw.githubusercontent.com/istio/istio/release-1.9/samples/addons/grafana.yaml
+kubectl apply -f https://raw.githubusercontent.com/istio/istio/release-1.9/samples/addons/prometheus.yaml
+kubectl apply -f https://raw.githubusercontent.com/istio/istio/release-1.9/samples/addons/jaeger.yaml
 ```
 
-###3. Install the eastwest ingress gateway to expose the istiod
+### 3. Install the eastwest ingress gateway to expose the istiod
 ```bash
 #${HOME}/istio-1.9.0/samples/multicluster/gen-eastwest-gateway.sh \
 #--mesh mesh1 --cluster "${CLUSTER}" --network "${CLUSTER_NETWORK}" > eastwest-ingreess-gateway.yaml
@@ -29,23 +37,57 @@ istioctl install \
 istioctl install -f eastwest-ingress-gateway.yaml
 ```
 
-###4. Expose the istiod and other services to the managed VM.
+### 4. Expose the istiod and other services to the managed VM.
 ```bash
 kubectl apply -f expose-istiod.yaml
 kubectl apply -f expose-services.yaml
 ```
 
-###5. Create the serviceAccount 
+### 5. Create the serviceAccount 
 ```bash
 #kubectl create serviceaccount "${SERVICE_ACCOUNT}" -n "${VM_NAMESPACE}"
 kubectl create serviceaccount "vm-apache" -n "default"
 ```
 
+### 6. Create the Workload Group and geneate the files to transfer to the Virtual Machine
 ```bash
 rm -rf "${HOME}/istio-vm"
 mkdir -p "${HOME}/istio-vm"
 istioctl x workload entry configure -f workload-group.yaml -o "${HOME}/istio-vm" --clusterID "cluster1" --autoregister
 echo "ISTIO_AGENT_FLAGS=\"--log_caller=all --log_output_level=all:debug --proxyLogLevel=debug\"" >> ${HOME}/istio-vm/cluster.env
+```
+
+
+```bash
+#!/bin/bash
+
+WORK_DIR="${HOME}/istio-vm-sidecar"
+
+rm -rf ${WORK_DIR}
+mkdir ${WORK_DIR}
+scp hung@istio-control-plane-v19:~/istio-vm/* ${WORK_DIR}
+
+sudo mkdir -p /etc/certs
+sudo mkdir -p /var/run/secrets/tokens
+
+sudo cp ${WORK_DIR}/root-cert.pem /etc/certs/root-cert.pem
+sudo cp ${WORK_DIR}/istio-token /var/run/secrets/tokens/istio-token
+
+curl -LO https://storage.googleapis.com/istio-release/releases/1.9.0/deb/istio-sidecar.deb
+sudo dpkg -i istio-sidecar.deb
+
+sudo cp ${WORK_DIR}/cluster.env /var/lib/istio/envoy/cluster.env
+sudo cp ${WORK_DIR}/mesh.yaml /etc/istio/config/mesh
+
+#sudo sh -c 'cat $(eval echo ${HOME})/istio-vm-sidecar/hosts >> /etc/hosts'
+
+sudo mkdir -p /etc/istio/proxy
+sudo chown -R istio-proxy /var/lib/istio /etc/certs /etc/istio/proxy /etc/istio/config /var/run/secrets /etc/certs/root-cert.pem
+
+#sudo systemctl stop istio
+sudo systemctl start istio
+tail /var/log/istio/istio.err.log /var/log/istio/istio.log -Fq -n 100
+curl -s localhost:15000/config_dump | istioctl proxy-config clusters --file -
 ```
 
 ```bash
@@ -94,13 +136,10 @@ docker run \
   nginx:1.19.7
 ```
 
-
-
-
-istioctl kube-inject -f ${HOME}/istio-1.9.0/samples/helloworld/helloworld.yaml
-
 ```bash
+#kubectl apply -f <(istioctl kube-inject -f ${HOME}/istio-1.9.0/samples/helloworld/helloworld.yaml)
 kubectl apply -f <(istioctl kube-inject -f curl-deployment.yaml)
 ```
 
-[Envoy Request Flow](https://www.envoyproxy.io/docs/envoy/latest/intro/life_of_a_request#request-flow)
+### References
+* [Envoy Request Flow](https://www.envoyproxy.io/docs/envoy/latest/intro/life_of_a_request#request-flow)
