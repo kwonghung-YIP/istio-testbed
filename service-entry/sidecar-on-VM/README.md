@@ -20,7 +20,6 @@ istioctl install \
   --set values.pilot.env.PILOT_ENABLE_WORKLOAD_ENTRY_AUTOREGISTRATION=true \
   --set values.pilot.env.PILOT_ENABLE_WORKLOAD_ENTRY_HEALTHCHECKS=true
 
-
 # Install other components
 
 kubectl apply -f https://raw.githubusercontent.com/istio/istio/release-1.9/samples/addons/kiali.yaml
@@ -32,7 +31,7 @@ kubectl apply -f https://raw.githubusercontent.com/istio/istio/release-1.9/sampl
 ### 3. Install the eastwest ingress gateway to expose the istiod
 ```bash
 #${HOME}/istio-1.9.0/samples/multicluster/gen-eastwest-gateway.sh \
-#--mesh mesh1 --cluster "${CLUSTER}" --network "${CLUSTER_NETWORK}" > eastwest-ingreess-gateway.yaml
+--mesh mesh1 --cluster "${CLUSTER}" --network "${CLUSTER_NETWORK}" > eastwest-ingreess-gateway.yaml
 
 istioctl install -f eastwest-ingress-gateway.yaml
 ```
