@@ -1,9 +1,51 @@
+Reference to [Virtual Machine Installation] in Istio 1.9.0 (https://istio.io/latest/docs/setup/install/virtual-machine/)
+
+##1 Install Istio and eastwest ingress gateway
+
 ```bash
-docker run \
-  --name tomcat7 -d --rm \
-  --hostname tomcat7-host1 \
-  -p 8080:8080 \
-  tomcat:7-jdk8
+VM_APP="ext-apache"
+VM_NAMESPACE="default"
+WORK_DIR="${HOME}/istio-vm"
+SERVICE_ACCOUNT="vm-apache"
+# Customize values for multi-cluster/multi-network as needed
+CLUSTER_NETWORK="kube-network"
+VM_NETWORK="vm-network"
+CLUSTER="cluster1"
+```
+
+###2. Install the Istio, the istio-profile.yaml combine the demo profile and multi-network profile, it also enabled the workload entry auto-registration and healthcheck feature 
+```bash
+istioctl install \
+  -f istio-profile.yaml \
+  --set values.pilot.env.PILOT_ENABLE_WORKLOAD_ENTRY_AUTOREGISTRATION=true \
+  --set values.pilot.env.PILOT_ENABLE_WORKLOAD_ENTRY_HEALTHCHECKS=true
+```
+
+###3. Install the eastwest ingress gateway to expose the istiod
+```bash
+#${HOME}/istio-1.9.0/samples/multicluster/gen-eastwest-gateway.sh \
+#--mesh mesh1 --cluster "${CLUSTER}" --network "${CLUSTER_NETWORK}" > eastwest-ingreess-gateway.yaml
+
+istioctl install -f eastwest-ingress-gateway.yaml
+```
+
+###4. Expose the istiod and other services to the managed VM.
+```bash
+kubectl apply -f expose-istiod.yaml
+kubectl apply -f expose-services.yaml
+```
+
+###5. Create the serviceAccount 
+```bash
+#kubectl create serviceaccount "${SERVICE_ACCOUNT}" -n "${VM_NAMESPACE}"
+kubectl create serviceaccount "vm-apache" -n "default"
+```
+
+```bash
+rm -rf "${HOME}/istio-vm"
+mkdir -p "${HOME}/istio-vm"
+istioctl x workload entry configure -f workload-group.yaml -o "${HOME}/istio-vm" --clusterID "cluster1" --autoregister
+echo "ISTIO_AGENT_FLAGS=\"--log_caller=all --log_output_level=all:debug --proxyLogLevel=debug\"" >> ${HOME}/istio-vm/cluster.env
 ```
 
 ```bash
@@ -51,37 +93,9 @@ docker run \
   -v $(pwd)/apache/server.crt:/etc/nginx/certs/server.crt \
   nginx:1.19.7
 ```
-istioctl install \
-  -f istio-profile.yaml \
-  --set values.pilot.env.PILOT_ENABLE_WORKLOAD_ENTRY_AUTOREGISTRATION=true \
-  --set values.pilot.env.PILOT_ENABLE_WORKLOAD_ENTRY_HEALTHCHECKS=true
 
-```bash
-VM_APP="ext-apache"
-VM_NAMESPACE="default"
-WORK_DIR="<a certificate working directory>"
-SERVICE_ACCOUNT="<name of the Kubernetes service account you want to use for your VM>"
-# Customize values for multi-cluster/multi-network as needed
-CLUSTER_NETWORK="kube-network"
-VM_NETWORK="vm-network"
-CLUSTER="cluster1"
-```
 
-${HOME}/istio-1.9.0/samples/multicluster/gen-eastwest-gateway.sh \
---mesh mesh1 --cluster "${CLUSTER}" --network "${CLUSTER_NETWORK}"
 
-istioctl install -f eastwest-ingress-gateway.yaml
-kubectl apply -f expose-istiod.yaml
-kubectl apply -f expose-services.yaml
-
-kubectl create serviceaccount "vm-apache" -n "default"
-
-```bash
-rm -rf "${HOME}/istio-vm"
-mkdir -p "${HOME}/istio-vm"
-istioctl x workload entry configure -f workload-group.yaml -o "${HOME}/istio-vm" --clusterID "cluster1" --autoregister
-echo "ISTIO_AGENT_FLAGS=\"--log_caller=all --log_output_level=all:debug --proxyLogLevel=debug\"" >> ${HOME}/istio-vm/cluster.env
-```
 
 istioctl kube-inject -f ${HOME}/istio-1.9.0/samples/helloworld/helloworld.yaml
 
