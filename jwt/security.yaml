@@ -23,12 +23,13 @@ spec:
 apiVersion: security.istio.io/v1beta1
 kind: AuthorizationPolicy
 metadata:
-  name: enforce-authenticate
+  name: allow-auth-access-only
   namespace: default
 spec:
   selector: {}
-  action: DENY
+  action: ALLOW
   rules:
   - from:
     - source:
-        notRequestPrincipals: ["*"]
+        requestPrincipals:
+        - "*"
