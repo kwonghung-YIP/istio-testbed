@@ -2,7 +2,7 @@
 apiVersion: security.istio.io/v1beta1
 kind: RequestAuthentication
 metadata:
-  name: "jwt-example"
+  name: "jwt-ingressgateway"
   namespace: istio-system
 spec:
   selector:
@@ -19,11 +19,16 @@ spec:
   #  jwksUri: "https://dev-jkd6ttlt.us.auth0.com/.well-known/jwks.json"
   #  audiences:
   #  - "http://auth0-test.hung.org.hk/"
-#---
-#apiVersion: security.istio.io/v1beta1
-#kind: AuthorizationPolicy
-#metadata:
-#  name: nginx
-#  namespace: default
-#spec:
-#  selector: {}
+---
+apiVersion: security.istio.io/v1beta1
+kind: AuthorizationPolicy
+metadata:
+  name: enforce-authenticate
+  namespace: default
+spec:
+  selector: {}
+  action: DENY
+  rules:
+  - from:
+    - source:
+        notRequestPrincipals: ["*"]
