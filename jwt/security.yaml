@@ -7,7 +7,7 @@ metadata:
 spec:
   selector: {}
   jwtRules:
-  - issuer: "https://dev-jkd6ttlt.us.auth0.com/oauth/token"
+  - issuer: "https://dev-jkd6ttlt.us.auth0.com"
 ---
 apiVersion: security.istio.io/v1beta1
 kind: AuthorizationPolicy
