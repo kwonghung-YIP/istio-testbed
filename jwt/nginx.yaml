@@ -53,6 +53,8 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: site-content-configmap
+  labels:
+    app: nginx
 data:
   echo.txt: |-
     test page from nginx 1.19.8 ~~
