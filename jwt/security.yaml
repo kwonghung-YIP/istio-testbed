@@ -14,6 +14,7 @@ spec:
     fromHeaders:
     - name: "Authorization"
       prefix: "Bearer "
+    outputPayloadToHeader: "hung-test-jwt"
   #- issuer: "https://dev-jkd6ttlt.us.auth0.com"
   #  jwksUri: "https://dev-jkd6ttlt.us.auth0.com/.well-known/jwks.json"
   #  audiences:
