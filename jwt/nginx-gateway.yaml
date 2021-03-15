@@ -7,7 +7,7 @@ metadata:
 spec:
   # suppose the selector can reach the ingress-controller in istio-system space
   selector:
-    app: "default/istio-ingressgateway"
+    app: "istio-system/istio-ingressgateway"
   servers:
   - port:
       number: 80
