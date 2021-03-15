@@ -3,11 +3,10 @@ apiVersion: networking.istio.io/v1alpha3
 kind: Gateway
 metadata:
   name: hung-org-hk-gateway
-  namespace: default
 spec:
   # suppose the selector can reach the ingress-controller in istio-system space
   selector:
-    app: "default/istio-ingressgateway"
+    app: "istio-ingressgateway"
   servers:
   - port:
       number: 80
