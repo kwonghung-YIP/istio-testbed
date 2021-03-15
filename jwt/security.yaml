@@ -11,6 +11,9 @@ spec:
   jwtRules:
   - issuer: "testing@secure.istio.io"
     jwksUri: "https://raw.githubusercontent.com/istio/istio/release-1.9/security/tools/jwt/samples/jwks.json"
+    fromHeaders:
+    - name: "Authorization"
+      prefix: "Bearer "
   #- issuer: "https://dev-jkd6ttlt.us.auth0.com"
   #  jwksUri: "https://dev-jkd6ttlt.us.auth0.com/.well-known/jwks.json"
   #  audiences:
