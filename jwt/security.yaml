@@ -8,6 +8,9 @@ spec:
   selector: {}
   jwtRules:
   - issuer: "https://dev-jkd6ttlt.us.auth0.com"
+    jwksUri: "https://dev-jkd6ttlt.us.auth0.com/.well-known/jwks.json"
+    audiences:
+    - "http://auth0-test.hung.org.hk/"
 ---
 apiVersion: security.istio.io/v1beta1
 kind: AuthorizationPolicy
