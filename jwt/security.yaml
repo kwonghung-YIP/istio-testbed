@@ -6,7 +6,8 @@ metadata:
   namespace: default
 spec:
   selector: {}
-
+  jwtRules:
+  - issuer: "https://dev-jkd6ttlt.us.auth0.com/oauth/token"
 ---
 apiVersion: security.istio.io/v1beta1
 kind: AuthorizationPolicy
