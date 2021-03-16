@@ -24,9 +24,12 @@ apiVersion: security.istio.io/v1beta1
 kind: AuthorizationPolicy
 metadata:
   name: deny-anonymous-access
-  namespace: default
+  namespace: istio-system
 spec:
   action: DENY
+  selector:
+    matchLabels:
+      istio: ingressgateway
   rules:
   - from:
     - source:
