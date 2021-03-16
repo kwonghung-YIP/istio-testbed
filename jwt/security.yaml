@@ -23,12 +23,9 @@ spec:
 apiVersion: security.istio.io/v1beta1
 kind: AuthorizationPolicy
 metadata:
-  name: deny-anonymous-access
+  name: deny-all
   namespace: default
 spec:
-  selector: {}
   action: DENY
   rules:
-  - from:
-    - source:
-        notRequestPrincipals: ["*"]
+  - {}
