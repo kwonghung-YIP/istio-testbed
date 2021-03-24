@@ -42,4 +42,5 @@ spec:
         - containerPort: 8080
         - containerPort: 8443
         args:
-          - "--spring.active.profiles=k8s"
+          - "--spring.profiles.active=k8s"
+        imagePullPolicy: Always
