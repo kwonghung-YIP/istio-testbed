@@ -1,0 +1,45 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: spring-boot-app
+  labels:
+    app: spring-boot-app
+spec:
+  selector:
+    app: spring-boot-app
+  #type: LoadBalancer
+  type: ClusterIP
+  ports:
+  - name: http
+    protocol: TCP
+    port: 8080
+  - name: https
+    protocol: TCP
+    port: 8443
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: spring-boot-app
+  labels:
+    app: spring-boot-app
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: spring-boot-app
+  template:
+    metadata:
+      labels:
+        app: spring-boot-app
+        version: "v1.0.0"
+    spec:
+      containers:
+      - name: spring-boot
+        image: docker.io/kwonghung/spring-security-auth0:v1.0.1
+        ports:
+        - containerPort: 8080
+        - containerPort: 8443
+        args:
+          - "--spring.active.profiles=k8s"
