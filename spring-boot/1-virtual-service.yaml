@@ -16,9 +16,3 @@ spec:
   - route:
     - destination:
         host: spring-boot-app
-        port:
-          number: 80
-    - destination:
-        host: spring-boot-app
-        port:
-          number: 443
