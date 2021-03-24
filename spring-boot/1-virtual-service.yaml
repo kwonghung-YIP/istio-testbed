@@ -1,0 +1,24 @@
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: spring-boot-app
+spec:
+  hosts:
+  - spring-auth0.hung.org.hk
+  gateways:
+  #- "istio-system/nginx-gateway"
+  - hung-org-hk-gateway
+  exportTo:
+  # virtual service has to export to istio-system namespace in order to forward the request from the ingress-gateway
+  - istio-system
+  http:
+  - route:
+    - destination:
+        host: spring-boot-app
+        port:
+          number: 80
+    - destination:
+        host: spring-boot-app
+        port:
+          number: 443
