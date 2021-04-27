@@ -23,11 +23,11 @@ spec:
         - containerPort: 8080
         env:
         - name: JAVA_TOOL_OPTIONS
-          value: 
-          - "-Dcom.sum.management.jmxremote=true"
-          - "-Dcom.sum.management.jmxremote.port=8888"
-          - "-Dcom.sum.management.jmxremote.authenticate=false"
-          - "-Dcom.sum.management.jmxremote.ssl=false"
+          value: >-
+            -Dcom.sum.management.jmxremote=true
+            -Dcom.sum.management.jmxremote.port=8888
+            -Dcom.sum.management.jmxremote.authenticate=false
+            -Dcom.sum.management.jmxremote.ssl=false
         args:
           - "--spring.profiles.active=k8s"
         imagePullPolicy: Always
