@@ -34,3 +34,7 @@ spec:
         args:
           - "--spring.profiles.active=k8s"
         imagePullPolicy: Always
+      - name: openjdk
+        image: openjdk:11
+        imagePullPolicy: Always
+        
