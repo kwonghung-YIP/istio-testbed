@@ -25,7 +25,10 @@ spec:
         env:
         - name: JAVA_TOOL_OPTIONS
           value: >-
+            -Dcom.sum.management.jmxremote.host=0.0.0.0
             -Dcom.sum.management.jmxremote.port=8888
+            -Djava.rmi.server.hostname=0.0.0.0
+            -Dcom.sum.management.jmxremote.rmi.port=8888
             -Dcom.sum.management.jmxremote.authenticate=false
             -Dcom.sum.management.jmxremote.ssl=false
         args:
