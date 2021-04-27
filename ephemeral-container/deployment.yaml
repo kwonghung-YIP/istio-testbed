@@ -18,10 +18,9 @@ spec:
     spec:
       containers:
       - name: spring-boot
-        image: docker.io/kwonghung/spring-security-auth0:v1.0.1
+        image: kwonghung/springboot-oauth2-client:latest
         ports:
         - containerPort: 8080
-        - containerPort: 8443
         args:
           - "--spring.profiles.active=k8s"
         imagePullPolicy: Always
