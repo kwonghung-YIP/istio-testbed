@@ -2,7 +2,7 @@
     "apiVersion": "v1",
     "kind": "EphemeralContainers",
     "metadata": {
-        "name": "spring-boot-app-7467d"
+        "name": "spring-boot-app-7467df57cb-z6k6x"
     },
     "ephemeralContainers": [{
         "command": [
