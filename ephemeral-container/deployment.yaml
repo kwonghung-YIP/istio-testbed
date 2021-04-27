@@ -36,5 +36,6 @@ spec:
         imagePullPolicy: Always
       - name: openjdk
         image: openjdk:11
+        command: ["/bin/sh", "-ec", "while :; do echo '.'; sleep 5 ; done"]
         imagePullPolicy: Always
         
