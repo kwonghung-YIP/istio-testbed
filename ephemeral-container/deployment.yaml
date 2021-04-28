@@ -21,14 +21,14 @@ spec:
         image: kwonghung/springboot-oauth2-client:latest
         ports:
         - containerPort: 8080
-        #- containerPort: 8888
+        - containerPort: 8888
         env:
-        - name: JAVA_TOOL_OPTIONS_2
+        - name: JAVA_TOOL_OPTIONS
           value: >-
-            -Dcom.sun.management.jmxremote.host=0.0.0.0
+            #-Dcom.sun.management.jmxremote.host=0.0.0.0
             -Dcom.sun.management.jmxremote.port=8888
-            -Djava.rmi.server.hostname=0.0.0.0
-            -Dcom.sun.management.jmxremote.rmi.port=8888
+            #-Djava.rmi.server.hostname=0.0.0.0
+            #-Dcom.sun.management.jmxremote.rmi.port=8888
             -Dcom.sun.management.jmxremote.authenticate=false
             -Dcom.sun.management.jmxremote.ssl=false
         args:
