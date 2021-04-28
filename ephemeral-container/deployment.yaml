@@ -25,7 +25,9 @@ spec:
         env:
         - name: JAVA_TOOL_OPTIONS
           value: >-
+            -Dcom.sun.management.jmxremote
             -Dcom.sun.management.jmxremote.port=8888
+            -Dcom.sun.management.jmxremote.rmi.port=8889
             -Dcom.sun.management.jmxremote.authenticate=false
             -Dcom.sun.management.jmxremote.ssl=false
         args:
