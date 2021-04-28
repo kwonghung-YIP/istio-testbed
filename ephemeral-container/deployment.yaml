@@ -18,12 +18,12 @@ spec:
     spec:
       containers:
       - name: spring-boot
-        image: kwonghung/springboot-oauth2-client:latest
+        image: kwonghung/springboot-oauth2-client:jdk8
         ports:
         #- containerPort: 8080
         - containerPort: 8888
         env:
-        - name: JAVA_TOOL_OPTIONS
+        - name: JAVA_TOOL_OPTIONS2
           value: >-
             -Dcom.sun.management.jmxremote
             -Dcom.sun.management.jmxremote.port=8888
@@ -36,7 +36,7 @@ spec:
           - "--spring.profiles.active=k8s"
         imagePullPolicy: Always
       - name: openjdk
-        image: openjdk:11
+        image: openjdk:8
         command: ["/bin/sh", "-ec", "while :; do echo '.'; sleep 5 ; done"]
         imagePullPolicy: Always
         
