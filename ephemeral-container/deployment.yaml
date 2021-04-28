@@ -25,6 +25,8 @@ spec:
         env:
         - name: JAVA_TOOL_OPTIONS2
           value: >-
+            -Xms512m
+            -Xmx1024m
             -Dcom.sun.management.jmxremote
             -Dcom.sun.management.jmxremote.port=8888
             -Dcom.sun.management.jmxremote.rmi.port=8888
