@@ -20,8 +20,8 @@ spec:
       - name: spring-boot
         image: kwonghung/springboot-oauth2-client:jdk8
         ports:
-        #- containerPort: 8080
-        - containerPort: 8888
+        - containerPort: 8080
+        - containerPort: 1099
         env:
         - name: JAVA_TOOL_OPTIONS2
           value: >-
