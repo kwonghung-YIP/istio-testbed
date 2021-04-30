@@ -23,6 +23,8 @@ spec:
         - containerPort: 8080
         - containerPort: 1099
         env:
+        # both jmxremote.port and jmxremote.rmi.port properties should refer the same port therefore we only need to forward single port in k8s for JMX remote connection
+        # the java.rmi.server.hostname property should be ip/hostname of the host that will run kubectl port-forward to forward the JMX remote port 
         - name: JAVA_TOOL_OPTIONS
           value: >-
             -Xms512m
@@ -30,10 +32,8 @@ spec:
             -Dcom.sun.management.jmxremote
             -Dcom.sun.management.jmxremote.authenticate=false
             -Dcom.sun.management.jmxremote.ssl=false
-            # jmxremote.port and jmxremote.rmi.port should be the same therefore we only need to forward 1 port in k8s
             -Dcom.sun.management.jmxremote.port=1099
             -Dcom.sun.management.jmxremote.rmi.port=1099
-            # the ip/hostname of the host that will run kubectl port-forward to forward the JMX remote port 
             -Djava.rmi.server.hostname=192.168.1.132
             -Dspring.jmx.enabled=true
         args:
