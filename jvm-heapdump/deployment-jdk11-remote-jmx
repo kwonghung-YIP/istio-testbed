@@ -1,0 +1,44 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: spring-boot-app
+  labels:
+    app: spring-boot-app
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: spring-boot-app
+  template:
+    metadata:
+      labels:
+        app: spring-boot-app
+        version: "v1.0.0"
+    spec:
+      containers:
+      - name: spring-boot
+        image: kwonghung/springboot-oauth2-client:latest
+        ports:
+        - containerPort: 8080
+        - containerPort: 8888
+        - containerPort: 1099
+        env:
+        - name: JAVA_TOOL_OPTIONS
+          value: >-
+            -Xms512m
+            -Xmx1024m
+            -Dcom.sun.management.jmxremote
+            -Dcom.sun.management.jmxremote.port=8888
+            -Dcom.sun.management.jmxremote.rmi.port=8888
+            -Djava.rmi.server.hostname=127.0.0.1
+            -Dcom.sun.management.jmxremote.authenticate=false
+            -Dcom.sun.management.jmxremote.ssl=false
+            -Dcom.sun.management.jmxremote.local.only=false
+        args:
+          - "--spring.profiles.active=k8s"
+        imagePullPolicy: Always
+      - name: openjdk
+        image: openjdk:11
+        command: ["/bin/sh", "-ec", "while :; do echo '.'; sleep 5 ; done"]
+        imagePullPolicy: Always
